@@ -22,18 +22,19 @@
                 </div>
                 <ul class="sidebar-nav">
                     <li class="sidebar-item">
-                        <a href="/staff/home" class="sidebar-link">
+                        <a href="/admin/home" class="sidebar-link">
                             <i class="fa-solid fa-home pe-2"></i>
-                            Dashboard
+                            Kelola Akun
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="/staff/tambah-sekolah" class="sidebar-link"><i class="fa-solid fa-file-lines pe-2"></i>
-                            Tambah Data Sekolah
+                        <a href="/admin/tambah-akun" class="sidebar-link">
+                            <i class="fa-solid fa-file pe-2"></i>
+                            Tambah Akun
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="/staff/profile" class="sidebar-link"><i class="fa-regular fa-user pe-2"></i>
+                        <a href="/admin/profile" class="sidebar-link"><i class="fa-regular fa-user pe-2"></i>
                             Profile
                         </a>
                     </li>
@@ -57,8 +58,8 @@
                                 <img src="{{ asset('image/profile.png') }}" class="avatar img-fluid rounded" alt="">
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a href="profil.html" class="dropdown-item">Profile</a>
-                                <a href="logout" class="dropdown-item">Logout</a>
+                                <a href="/admin/profile" class="dropdown-item">Profile</a>
+                                <a href="/logout" class="dropdown-item">Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -74,6 +75,7 @@
                 @yield('container')
             </main>
             
+            {{-- Here is footer --}}
             <footer class="footer px-2 py-1 border-top">
                 <div class="container-fluid">
                     <div class="row text-muted">
