@@ -20,7 +20,7 @@ class DummyUsersSeeder extends Seeder
                 'email' => 'pai@gmail.com',
                 'phone' => '+62814568974123',
                 'role' => 'admin',
-                'pfp' => 'storage/profile/default_profile.png',
+                'pfp' => 'image/default_profile.png',
                 'password' => bcrypt('pai123')
             ],
             [
@@ -29,7 +29,7 @@ class DummyUsersSeeder extends Seeder
                 'email' => 'arrijal@gmail.com',
                 'phone' => '+62814568574123',
                 'role' => 'staff',
-                'pfp' => 'storage/profile/default_profile.png',
+                'pfp' => 'image/default_profile.png',
                 'password' => bcrypt('arrijal123')
             ]
         ];
