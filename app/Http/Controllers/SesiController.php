@@ -15,15 +15,15 @@ class SesiController extends Controller
     function login(Request $request)
     {
         $request->validate([
-            'email' => 'required',
+            'nip' => 'required',
             'password' => 'required'
         ], [
-            'email.required' => 'Email wajib diisi',
+            'nip.required' => 'nip wajib diisi',
             'password.required' => 'Password wajib diisi'
         ]);
 
         $infoLogin = [
-            'email' => $request->email,
+            'nip' => $request->nip,
             'password' => $request->password,
         ];
 

@@ -15,10 +15,10 @@
         <h1>Login</h1>
         <div class="inputbox">
             <ion-icon name="mail-outline"></ion-icon>
-            <input type="text" value="{{ old('email') }}" name="email">
-            <label for="">Email</label>
+            <input type="text" value="{{ old('nip') }}" name="nip">
+            <label for="">NIP</label>
         </div>
-        @error('email')
+        @error('nip')
                 <div class="error">* {{ $message }}</div>
         @enderror
         <div class="inputbox">
@@ -32,6 +32,7 @@
         @error('0')
             <div class="error">* {{ $message }}</div>
         @enderror
+        
         <button class="btn" type="submit">Log in</button>
     </form>
 </section>
