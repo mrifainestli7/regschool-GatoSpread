@@ -53,7 +53,7 @@ h4 {
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     width: 100%;
-    background: var(--bs-dark-bg-subtle);
+    background: #F3F4FF;
 }
 
 /* Sidebar Elements Style */
@@ -198,4 +198,8 @@ html[data-bs-theme="dark"] .theme-toggle .fa-moon {
 
 html[data-bs-theme="light"] .theme-toggle .fa-sun {
     display: none;
+}
+
+.error {
+    color: red;
 }

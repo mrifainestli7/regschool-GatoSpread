@@ -15,15 +15,21 @@ class DummyUsersSeeder extends Seeder
     {
         $usersData = [
             [
+                'nip' => '1',
                 'name' => 'pai',
                 'email' => 'pai@gmail.com',
+                'phone' => '+62814568974123',
                 'role' => 'admin',
+                'pfp' => 'storage/profile/default_profile.png',
                 'password' => bcrypt('pai123')
             ],
             [
+                'nip' => '2',
                 'name' => 'arrijal',
                 'email' => 'arrijal@gmail.com',
+                'phone' => '+62814568574123',
                 'role' => 'staff',
+                'pfp' => 'storage/profile/default_profile.png',
                 'password' => bcrypt('arrijal123')
             ]
         ];

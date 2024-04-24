@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,13 @@ class UserAkses
     {
         if (auth()->user()->role == $role) {
             return $next($request);
+        }else{
+            if (auth()->user()->role == 'admin') {
+                return redirect(RouteServiceProvider::ADMIN);
+            }elseif(auth()->user()->role == 'staff'){
+                return redirect(RouteServiceProvider::STAFF);
+            }
         }
-        // return redirect('ad'); fix this 
+        return redirect(RouteServiceProvider::HOME);
     }
 }

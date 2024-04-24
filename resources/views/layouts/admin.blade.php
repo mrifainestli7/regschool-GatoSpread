@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -55,7 +55,8 @@
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-                                <img src="{{ asset('image/profile.png') }}" class="avatar img-fluid rounded" alt="">
+                                <img src="{{ asset(Auth::user()->pfp) }}" class="avatar img-fluid rounded" alt="">
+
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a href="/admin/profile" class="dropdown-item">Profile</a>
