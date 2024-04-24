@@ -65,7 +65,7 @@
                                         <div class="error">* {{ $message }}</div>
                                     @enderror
                                     <!-- Tombol Submit -->
-                                    <button type="submit" class="btn btn-primary mt-4">Submit</button>
+                                    <button type="submit" class="btn btn-primary mt-4">OK</button>
                                 </form>
                             </div>
                         </div>
