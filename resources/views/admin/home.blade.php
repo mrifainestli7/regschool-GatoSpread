@@ -34,7 +34,7 @@
                                         <td>{{ $data->email }}</td>
                                         <td>{{ \Carbon\Carbon::parse($data->created_at)->isoFormat('dddd, D MMMM YYYY') }}</td>
                                         <td>
-                                            <a href="" class="btn btn-success btn-sm">
+                                            <a href="{{ route('admin.detail-akun', $data->id) }}" class="btn btn-success btn-sm">
                                                 <i class="bi bi-hand-index"></i>
                                                 Pilih
                                             </a>
