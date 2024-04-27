@@ -181,3 +181,8 @@ button:hover {
     color: red;
     padding-right: 7px;
 }
+
+.move-left {
+    text-align: left;
+    margin-top: 4px; /* Sesuaikan margin sesuai kebutuhan */
+  }
