@@ -3,9 +3,9 @@
 @section('container')
     <div class="container-fluid">
         <div class="mb-3">
-            <h4>Detail akun</h4>
+            <h4 class="mt-2 mb-4">Detail akun</h4>
             {{-- start here --}}
-
+            
             <div class="container mt-5">
                 <div class="row justify-content-center">
                     <div class="col-md-3">
@@ -58,7 +58,7 @@
                                     <!-- Password -->
                                     <div class="form-group">
                                         <label for="password">Reset password</label>
-                                        <input type="password" class="form-control" id="password" name="password" value="{{ old('password',$user->password) }}" placeholder="Masukkan Password" >
+                                        <input type="password" class="form-control" id="password" name="password" sword) }}" placeholder="Masukkan Password" >
                                     </div>
                                     @error('password')
                                         <div class="error">* {{ $message }}</div>
