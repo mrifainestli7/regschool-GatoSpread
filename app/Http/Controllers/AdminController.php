@@ -14,7 +14,7 @@ class AdminController extends Controller
 {
     function index(): View
     {   
-        $datas = User::where('role', 'staff')->select('id','pfp','nip', 'name', 'email', 'created_at')->get();
+        $datas = User::where('role', 'staff')->select('id','pfp','nip', 'name', 'email', 'phone', 'created_at')->get();
         return view('admin/home', compact('datas'));
     }
     
@@ -26,7 +26,7 @@ class AdminController extends Controller
     {
         $this->validate($request, [
             'picture' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
-            'nip' => 'required|numeric|unique:users,nip|digits_between:1,2147483647',
+            'nip' => 'required|numeric|unique:users,nip|between:0,999999999999', //validasi 20 digit nya masih kelewat
             'nama' => 'required|max:255',
             'email' => 'required|max:255|unique:users,email',
             'nomor_telepon' => 'required|max:255',
@@ -113,7 +113,7 @@ class AdminController extends Controller
             $request->file('picture')->storeAs('public/profile', $picture);
             $imagePath = "storage/profile/".$picture;
 
-            Storage::delete($user->pfp); //cek jika default_profile bisa dihapus dengna method ini 
+            Storage::delete('public/profile/1714119559_profile'); //cek jika default_profile bisa dihapus dengna method ini 
             
             if($request->filled('password')){
                 $user->update([
