@@ -15,7 +15,7 @@ class AdminController extends Controller
     function index(): View
     {   
         $datas = User::where('role', 'staff')->select('id','pfp','nip', 'name', 'email', 'phone', 'created_at')->get();
-        return view('admin/home', compact('datas'));
+        return view('admin.home', compact('datas'));
     }
     
     function tambahAkun(){ //fungsi untuk ke halaman admin tambah akun 
@@ -151,23 +151,20 @@ class AdminController extends Controller
                 ]);
             }
         }
-        // } else {
-        //     $imagePath = 'image/profile.png';
-        // }
-        
-        // User::create([
-        //     'pfp' => $imagePath,
-        //     'nip' => $request->nip,
-        //     'name' => $request->nama,
-        //     'email' => $request->email,
-        //     'phone' => $request->nomor_telepon,
-        //     'role' => 'staff',
-        //     'password' => bcrypt($request->password)
-        // ]);
-
+    
         return redirect()->route('admin.detail-akun', ['id' => $id])->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
+    function remove($id){
+         $user = User::findOrFail($id);
+
+         Storage::delete('public/profile/'. $user->pfp);
+ 
+         $user->delete();
+ 
+         return redirect()->route('admin.home')->with(['success' => 'Data Berhasil Dihapus!']);
+    }
+    
     function profile(){
         return view('admin/profile');
     }
