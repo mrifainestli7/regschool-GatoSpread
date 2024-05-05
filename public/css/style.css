@@ -203,3 +203,8 @@ html[data-bs-theme="light"] .theme-toggle .fa-sun {
 .error {
     color: red;
 }
+
+.move-right {
+    float: right;
+    margin-top: 4px; /* Sesuaikan margin sesuai kebutuhan */
+  }
