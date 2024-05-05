@@ -1,3 +1,4 @@
+
 @extends('layouts.admin')
 
 @section('container')
@@ -13,9 +14,8 @@
                             <div class="card-header" style="background-color: #4c45b4; color: white;">
                                 Input data akun
                             </div>
-                            <div class="card-body" >
-                                
-                                <form action="" method="POST" enctype="multipart/form-data">
+                            <div class="card-body">
+                                <form action="" method="POST" enctype="multipart/form-data" id="formAddAccount">
                                     @csrf
                                     <!-- NIP -->
                                     <div class="form-group mt-3">
@@ -74,7 +74,95 @@
                 </div>
             </div>
 
-             {{-- end here --}}
+            {{-- end here --}}
+
+            <!-- Pop-up Error -->
+            <div id="popupError" class="popup" style="display: none;">
+                <div class="popup-content">
+                    <span class="close" onclick="closeErrorPopup()">&times;</span>
+                    <p>Harap isi semua kolom yang bertanda *</p>
+                </div>
+            </div>
+
+            <!-- Pop-up Success -->
+            <div id="popupSuccess" class="popup" style="display: none;">
+                <div class="popup-content">
+                    <span class="close" onclick="closeSuccessPopup()">&times;</span>
+                    <p>Akun berhasil ditambahkan!</p>
+                </div>
+            </div>
         </div>
     </div>
+
+    <style>
+        /* Popup container */
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        /* Popup content */
+        .popup-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 5px;
+        }
+
+        /* Close button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        function checkForm() {
+            var inputs = document.getElementById('formAddAccount').querySelectorAll('input');
+            var isValid = true;
+            inputs.forEach(function(input) {
+                if (input.value.trim() === "") {
+                    isValid = false;
+                }
+            });
+            if (!isValid) {
+                document.getElementById('popupError').style.display = 'block';
+            } else {
+                // Simulate submission success (remove this line in real usage)
+                setTimeout(function() {
+                    document.getElementById('popupSuccess').style.display = 'block';
+                }, 1000);
+                // In real usage, you would submit the form here
+                // document.getElementById('formAddAccount').submit();
+            }
+        }
+
+        function closeErrorPopup() {
+            document.getElementById('popupError').style.display = 'none';
+        }
+
+        function closeSuccessPopup() {
+            document.getElementById('popupSuccess').style.display = 'none';
+        }
+    </script>
 @endsection
