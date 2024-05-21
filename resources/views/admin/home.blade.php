@@ -37,7 +37,7 @@
                                                     <td class="text-center align-middle">
                                                         <a href="{{ route('admin.detail-akun', $data->id)}}" class="btn btn-success btn-sm rounded-4 mx-2 my-2" style="background-color: #4c45b4;">
                                                             <i class="bi bi-hand-index "></i>
-                                                            <p2 class="px-2 py-1">Edit Akun</p2>
+                                                            <p2 class="px-2 py-1">Detail</p2>
                                                         </a>
                                                     </td>
                                                 </tr>

@@ -31,6 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/home', [AdminController::class, 'index'])->middleware('userAkses:admin')->name('admin.home');
     Route::get('/admin/tambah-akun', [AdminController::class, 'tambahAkun'])->middleware('userAkses:admin')->name('admin.tambahAkun');
     Route::post('/admin/tambah-akun', [AdminController::class, 'setAkun'])->middleware('userAkses:admin')->name('admin.tambahAkun');
+    Route::get('/admin/hapus-akun/{id}', [AdminController::class, 'remove'])->middleware('userAkses:admin')->name('admin.hapusAkun');
     Route::get('/admin/detail-akun/{id}', [AdminController::class, 'detailAkun'])->middleware('userAkses:admin')->name('admin.detail-akun');
     Route::post('/admin/detail-akun/{id}', [AdminController::class, 'editAkun'])->middleware('userAkses:admin');
     Route::get('/admin/profile', [AdminController::class, 'profile'])->middleware('userAkses:admin');
