@@ -3,8 +3,7 @@
 @section('container')
     <div class="container-fluid">
         <div class="mb-3">
-            <h4 class="mt-2 mb-4">Tambah Data Sekolah</h4>
-           
+            <h4 class="mt-2 mb-4">Tambah Data Sekolah</h4>           
             <div class="col-md-17">
                         <div class="card">
                             <div class="card-header" style="background-color: #4c45b4; color: white;">
