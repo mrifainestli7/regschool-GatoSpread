@@ -1,10 +1,9 @@
-
-@extends('layouts.admin')
+@extends('layouts.main')
 
 @section('container')
-    <div class="container-fluid">
+<div class="container-fluid">
         <div class="mb-3 ">
-            <h4 class="mt-2 mb-4">Tambah akun</h4>
+            <h4 class="mt-2 mb-4">Update Tahun Ajar</h4>
             {{-- start here --}}
 
             <div class="container">
@@ -12,56 +11,81 @@
                     <div class="col-md-17">
                         <div class="card">
                             <div class="card-header" style="background-color: #4c45b4; color: white;">
-                                Input data akun
+                                Input data Tahun Ajar
                             </div>
                             <div class="card-body">
                                 <form action="" method="POST" enctype="multipart/form-data" id="formAddAccount">
                                     @csrf
-                                    <!-- NIP -->
+                                    <!-- Tahun Ajar -->
                                     <div class="form-group mt-3">
-                                        <label for="nip">NIP</label>
-                                        <input type="number" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" value="{{ old('nip') }}" placeholder="Masukkan NIP" >
+                                        <label for="tahun_ajar">Tahun Ajar</label>
+                                        <input type="number" class="form-control @error('tahun_ajar') is-invalid @enderror" id="tahun_ajar" name="tahun_ajar" value="" placeholder="Masukkan Tahun Ajar" >
                                     </div>
-                                    @error('nip')
+                                    @error('tahun_ajar')
                                         <div class="error">* {{ $message }}</div>
                                     @enderror
-                                    <!-- Nama -->
+                                    <!-- Kepala Sekolah -->
                                     <div class="form-group mt-3">
-                                        <label for="nama">Nama</label>
-                                        <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Nama" >
+                                        <label for="namaKepsek">Nama Kepala Sekolah</label>
+                                        <input type="text" class="form-control @error('namaKepsek') is-invalid @enderror" id="namaKepsek" name="namaKepsek" value="{{ old('namaKepsek') }}" placeholder="Masukkan Nama Kepala Sekolah" >
                                     </div>
-                                    @error('nama')
+                                    @error('namaKepsek')
                                         <div class="error">* {{ $message }}</div>
                                     @enderror
-                                    <!-- Nomor Telepon -->
+                                    <!-- Nomor Hp Kepala Sekolah -->
                                     <div class="form-group mt-3">
-                                        <label for="nomor_telepon">Nomor Telepon</label>
-                                        <input type="tel" class="form-control @error('nomor_telepon') is-invalid @enderror" id="nomor_telepon" name="nomor_telepon" value="{{ old('nomor_telepon') }}" placeholder="Masukkan Nomor Telepon" >
+                                        <label for="noHpKepsek">Nomor Telepon</label>
+                                        <input type="text" class="form-control @error('noHpKepsek') is-invalid @enderror" id="noHpKepsek" name="noHpKepsek" value="{{ old('noHpKepsek') }}" placeholder="Masukkan Nomor Telepon" >
                                     </div>
-                                    @error('nomor_telepon')
+                                    @error('noHpKepsek')
                                         <div class="error">* {{ $message }}</div>
                                     @enderror
-                                    <!-- E-mail -->
-                                    <div class="form-group mt-3">
-                                        <label for="email">E-mail</label>
-                                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" placeholder="Masukkan E-mail" >
+                                     <!-- Jumlah Guru Honorer -->
+                                     <div class="form-group mt-3">
+                                        <label for="jmlGuruHonor">Jumlah Guru Hononer</label>
+                                        <input type="text" class="form-control @error('jmlGuruHonor') is-invalid @enderror" id="jmlGuruHonor" name="jmlGuruHonor" value="{{ old('jmlGuruHonor') }}" placeholder="Masukkan Jumlah Guru Honor" >
                                     </div>
-                                    @error('email')
+                                    @error('jmlGuruHonor')
                                         <div class="error">* {{ $message }}</div>
                                     @enderror
-                                    <!-- Password -->
-                                    <div class="form-group mt-3">
-                                        <label for="password">Password</label>
-                                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" value="{{ old('password') }}" placeholder="Masukkan Password" >
+                                       <!-- Jumlah Guru PNS -->
+                                       <div class="form-group mt-3">
+                                        <label for="jmlGuruPNS">Jumlah Guru PNS</label>
+                                        <input type="text" class="form-control @error('jmlGuruPNS') is-invalid @enderror" id="jmlGuruPNS" name="jmlGuruPNS" value="{{ old('jmlGuruPNS') }}" placeholder="Masukkan Jumlah Guru PNS" >
                                     </div>
-                                    @error('password')
+                                    @error('jmlGuruPNS')
                                         <div class="error">* {{ $message }}</div>
                                     @enderror
-                                    <div class="form-group mt-3">
-                                    <label for="picture">Foto Profil</label>
-                                     <input type="file" class="form-control rounded @error('picture') is-invalid @enderror" id="picture" name="picture">
+                                      <!-- Jumlah Rombel -->
+                                      <div class="form-group mt-3">
+                                        <label for="jmlRombel">Jumlah Rombel</label>
+                                        <input type="text" class="form-control @error('jmlRombel') is-invalid @enderror" id="jmlRombel" name="jmlRombel" value="{{ old('jmlRombel') }}" placeholder="Masukkan Jumlah Rombel" >
                                     </div>
-                                    @error('picture')
+                                    @error('jmlRombel')
+                                        <div class="error">* {{ $message }}</div>
+                                    @enderror
+                                      <!-- Jumlah Murid Pria -->
+                                      <div class="form-group mt-3">
+                                        <label for="jmlpria">Jumlah Murid Pria</label>
+                                        <input type="text" class="form-control @error('jmlpria') is-invalid @enderror" id="jmlpria" name="jmlpria" value="{{ old('jmlpria') }}" placeholder="Masukkan Jumlah Murid Laki-Laki" >
+                                    </div>
+                                    @error('jmlpria')
+                                        <div class="error">* {{ $message }}</div>
+                                    @enderror
+                                      <!-- Jumlah Murid Wanita -->
+                                      <div class="form-group mt-3">
+                                        <label for="jmlwanita">Jumlah Murid Wanita</label>
+                                        <input type="text" class="form-control @error('jmlwanita') is-invalid @enderror" id="jjmlwanita" name="jmlwanita" value="{{ old('jmlwanita') }}" placeholder="Masukkan Jumlah Murid Wanita" >
+                                    </div>
+                                    @error('jmlwanita')
+                                        <div class="error">* {{ $message }}</div>
+                                    @enderror
+                                    <!-- ID Sekolah -->
+                                    <div class="form-group mt-3">
+                                        <label for="id_sekolah">ID Sekolah</label>
+                                        <input type="text" class="form-control @error('id_sekolah') is-invalid @enderror" id="id_sekolah" name="id_sekolah" value="{{ old('id_sekolah') }}" placeholder="Masukkan ID Sekolah" >
+                                    </div>
+                                    @error('id_sekolah')
                                         <div class="error">* {{ $message }}</div>
                                     @enderror
                                     <!-- Tombol Submit -->
