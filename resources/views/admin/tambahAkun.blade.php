@@ -3,7 +3,7 @@
 
 @section('container')
     <div class="container-fluid">
-        <div class="mb-3">
+        <div class="mb-3 ">
             <h4 class="mt-2 mb-4">Tambah akun</h4>
             {{-- start here --}}
 
