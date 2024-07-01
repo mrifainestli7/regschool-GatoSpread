@@ -13,11 +13,17 @@ return new class extends Migration
     {
         Schema::create('sekolah', function (Blueprint $table) {
             $table->id('id_sekolah');
+            $table->string('npsn');
             $table->string('nama_sekolah');
-            $table->string('alamat_sekolah');
-            $table->text('deskripsi_sekolah');
+            $table->text('deskripsi');
+            $table->enum('status', ['Negeri', 'Swasta'])->default('Negeri');
+            $table->string('alamat');
+            $table->string('rt');
+            $table->string('rw');
+            $table->string('kelurahan_desa');
             $table->unsignedBigInteger('id_kecamatan');
             $table->foreign('id_kecamatan')->references('id_kecamatan')->on('kecamatan');
+            $table->string('kode_pos');
             $table->timestamps();
         });
     }
