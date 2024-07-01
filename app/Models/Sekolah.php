@@ -15,13 +15,31 @@ class Sekolah extends Model
     protected $keyType = 'bigInteger';
     protected $fillable = [
         'nama_sekolah',
-        'alamat_sekolah',
-        'deskripsi_sekolah',
-        'id_kecamatan'
+        'npsn',
+        'deskripsi',
+        'status',
+        'alamat',
+        'rt',
+        'rw',
+        'kelurahan_desa',
+        'id_kecamatan',
+        'kode_pos',
     ];
 
     public function kecamatan(): BelongsTo
     {
         return $this->belongsTo(Kecamatan::class, 'id_kecamatan', 'id_kecamatan');
     }
+
+    public function sarpras()
+    {
+        return $this->hasOne(Sarpras::class, 'id_sekolah', 'id_sekolah');
+    }
+
+    public function rekap()
+    {
+        return $this->hasOne(Rekap::class, 'id_sekolah', 'id_sekolah');
+    }
+
+
 }
