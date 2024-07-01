@@ -30,4 +30,16 @@ class Sekolah extends Model
     {
         return $this->belongsTo(Kecamatan::class, 'id_kecamatan', 'id_kecamatan');
     }
+
+    public function sarpras()
+    {
+        return $this->hasOne(Sarpras::class, 'id_sekolah', 'id_sekolah');
+    }
+
+    public function rekap()
+    {
+        return $this->hasOne(Rekap::class, 'id_sekolah', 'id_sekolah');
+    }
+
+
 }

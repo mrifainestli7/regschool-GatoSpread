@@ -23,13 +23,13 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/staff/home', [StaffController::class, 'index'])->middleware('userAkses:staff')->name('staff.home');
+    Route::get('/staff/home', [StaffController::class, 'index'])->middleware('userAkses:staff');
     Route::get('/staff/tambah-sekolah', [StaffController::class, 'tambahSekolah'])->middleware('userAkses:staff');
     Route::post('/staff/tambah-sekolah', [StaffController::class, 'createSekolah'])->middleware('userAkses:staff');
     Route::get('/staff/ubah-sekolah/{id_sekolah}', [StaffController::class, 'ubahSekolah'])->middleware('userAkses:staff');
     Route::post('/staff/ubah-sekolah/{id_sekolah}', [StaffController::class, 'updateSekolah'])->middleware('userAkses:staff');
     Route::get('/staff/hapus-sekolah/{id_sekolah}', [StaffController::class, 'hapusSekolah'])->middleware('userAkses:staff');
-    Route::get('/staff/profile', [StaffController::class, 'profile'])->middleware('userAkses:staff');
+    // Route::get('/staff/profile', [StaffController::class, 'profile'])->middleware('userAkses:staff');
     Route::get('/staff/profile_sekolah/{id_sekolah}/{id_tahunajar?}', [StaffController::class, 'profileSekolah'])->middleware('userAkses:staff')->name('staff.profile_sekolah');
     Route::get('/staff/tambah-rekap/{id_sekolah}/{id_tahunajar}', [StaffController::class, 'tambahRekap'])->middleware('userAkses:staff');
     Route::post('/staff/tambah-rekap/{id_sekolah}/{id_tahunajar}', [StaffController::class, 'createRekap'])->middleware('userAkses:staff');
@@ -44,14 +44,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/home', [AdminController::class, 'index'])->middleware('userAkses:admin')->name('admin.home');
     Route::get('/admin/tambah-akun', [AdminController::class, 'tambahAkun'])->middleware('userAkses:admin')->name('admin.tambahAkun');
     Route::post('/admin/tambah-akun', [AdminController::class, 'setAkun'])->middleware('userAkses:admin')->name('admin.tambahAkun');
-    Route::get('/admin/hapus-akun/{id}', [AdminController::class, 'remove'])->middleware('userAkses:admin')->name('admin.hapusAkun');
     Route::get('/admin/detail-akun/{id}', [AdminController::class, 'detailAkun'])->middleware('userAkses:admin')->name('admin.detail-akun');
     Route::post('/admin/detail-akun/{id}', [AdminController::class, 'editAkun'])->middleware('userAkses:admin');
     Route::get('/admin/profile', [AdminController::class, 'profile'])->middleware('userAkses:admin');
-
-    //rifal febiyan
-    // Route untuk menghapus akun admin
-     Route::delete('/admin/detail-akun/{id}', [AdminController::class, 'destroy'])->middleware('userAkses:admin')->name('admin.delete');
 
     Route::get('/logout', [SesiController::class, 'logout']);
 });
