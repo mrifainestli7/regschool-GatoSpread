@@ -5,87 +5,123 @@
         <div class="mb-3">
             <h4 class="mt-2 mb-4">Tambah Data Sekolah</h4>           
             <div class="col-md-17">
-                        <div class="card">
-                            <div class="card-header" style="background-color: #4c45b4; color: white;">
-                                Input data Akun
-                        </div>
-                        <div class="card-body">
-                                    <form action="" method="POST" enctype="multipart/form-data" id="formAddAccount">
-                                        @csrf
-                                    <div class="row">
-                                    <!-- Nama Sekolah -->
-                                    <div class="form-group mt-3 ">
-                                        <label>Nama Sekolah</label>
-                                        <input type="text" class="form-control" id="nama_sekolah" name="nama_sekoalah"  placeholder="Masukkan Nama" >
-                                    </div>
+                <div class="card">
+                    <div class="card-header" style="background-color: #4c45b4; color: white;">
+                        Input data Sekolah
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="POST" enctype="multipart/form-data" id="formAddSchool">
+                            @csrf
+                            <div class="row">
+                                <!-- Nama Sekolah dan NPSN dalam satu baris -->
+                                <div class="form-group col-md-6">
+                                    <label>Nama Sekolah</label>
+                                    <input type="text" class="form-control @error('nama_sekolah') is-invalid @enderror" id="nama_sekolah" name="nama_sekolah" value="{{ old('nama_sekolah') }}" placeholder="Masukkan Nama Sekolah">
+                                    @error('nama_sekolah')
+                                        <div class="invalid-feedback">* {{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="npsn">NPSN</label>
+                                    <input type="number" class="form-control @error('npsn') is-invalid @enderror" id="npsn" name="npsn" value="{{ old('npsn') }}" placeholder="Masukkan NPSN">
+                                    @error('npsn')
+                                        <div class="invalid-feedback">* {{ $message }}</div>
+                                    @enderror
+                                </div>
 
-                                      <!-- NPSN -->
-                                    <div class="form-group mt-3">
-                                        <label for="nama">NPSN</label>
-                                        <input type="text" class="form-control" id="NPSN" name="NPSN"  placeholder="Masukkan NPSN" >
+                                <!-- Status -->
+                                <div class="form-group mt-3 col-md-6">
+                                    <label for="status">Status</label>
+                                    <div class="d-flex align-items-center">
+                                        <div class="mr-3">
+                                            <label class="custom-control custom-radio custom-control-inline mr-3">
+                                                <input type="radio" name="status" value="Negeri" {{ old('status') == 'Negeri' ? 'checked' : '' }} class="custom-control-input">
+                                                <span class="custom-control-label">Negeri</span>
+                                            </label>
+                                            <label class="custom-control custom-radio custom-control-inline ml-3">
+                                                <input type="radio" name="status" value="Swasta" {{ old('status') == 'Swasta' ? 'checked' : '' }} class="custom-control-input">
+                                                <span class="custom-control-label">Swasta</span>
+                                            </label>
+                                        </div>
+                                        @error('status')
+                                            <div class="text-danger ps-5">* {{ $message }}</div>
+                                        @enderror
                                     </div>
+                                </div>
 
-                                    <!-- Kecamatan -->
-                                    <div class="form-group mt-3">
-                                        <label for="nama">Kecamatan</label>
-                                        <input type="text" class="form-control" id="Kecamatan" name="Kecamatan"  placeholder="Masukkan Kecamatan" >
-                                    </div>
-                                    
-                                    <div class="form-group mt-3">
-                                    <label for="nama">Status</label>
-                                    <div class="card-body  ">
-                                    
-                                        <form>
+                                <!-- Deskripsi -->
+                                <div class="form-group mt-3 col-md-12">
+                                    <label>Deskripsi Sekolah</label>
+                                    <textarea class="form-control @error('deskripsi') is-invalid @enderror" rows="3" id="deskripsi" name="deskripsi" placeholder="Masukkan Deskripsi Sekolah">{{ old('deskripsi') }}</textarea>
+                                    @error('deskripsi')
+                                        <div class="invalid-feedback">* {{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- Alamat -->
+                                <div class="form-group mt-3 col-md-12">
+                                    <label>Alamat</label>
+                                    <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" value="{{ old('alamat') }}" placeholder="Masukkan Alamat Sekolah">
+                                    @error('alamat')
+                                        <div class="invalid-feedback">* {{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- RT dan RW dalam satu baris -->
+                                <div class="form-group mt-3 col-md-6">
+                                    <label for="rt">RT</label>
+                                    <input type="text" class="form-control @error('rt') is-invalid @enderror" id="rt" name="rt" value="{{ old('rt') }}" placeholder="Masukkan RT">
+                                    @error('rt')
+                                        <div class="invalid-feedback">* {{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group mt-3 col-md-6">
+                                    <label for="rw">RW</label>
+                                    <input type="text" class="form-control @error('rw') is-invalid @enderror" id="rw" name="rw" value="{{ old('rw') }}" placeholder="Masukkan RW">
+                                    @error('rw')
+                                        <div class="invalid-feedback">* {{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- Kelurahan/Desa dan Kecamatan dalam satu baris -->
+                                <div class="form-group mt-3 col-md-6">
+                                    <label for="kelurahan_desa">Kelurahan/Desa</label>
+                                    <input type="text" class="form-control @error('kelurahan_desa') is-invalid @enderror" id="kelurahan_desa" name="kelurahan_desa" value="{{ old('kelurahan_desa') }}" placeholder="Masukkan Kelurahan/Desa">
+                                    @error('kelurahan_desa')
+                                        <div class="invalid-feedback">* {{ $message }}</div>
+                                    @enderror
+                                </div>
                     
-                                            <label class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" name="radio-inline" checked="" class="custom-control-input">
-                                                <span class="custom-control-label" > Negri   </span>
-                                            </label>
-                                            &nbsp &nbsp &nbsp &nbsp
-                                            <label class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" name="radio-inline" class="custom-control-input">
-                                                <span class="custom-control-label"> Swasta </span>
-                                            </label>
-                                        </form>
-                                    </div>
-                                    </div>
+                                <div class="form-group mt-3 col-md-6">
+                                    <label for="id_kecamatan">Kecamatan</label>
+                                    <select class="form-control @error('id_kecamatan') is-invalid @enderror" id="id_kecamatan" name="id_kecamatan">
+                                        <option value="" disabled selected>Pilih Kecamatan</option>
+                                        @foreach($kecamatans as $kecamatan)
+                                            <option value="{{ $kecamatan->id_kecamatan }}" {{ old('id_kecamatan') == $kecamatan->id_kecamatan ? 'selected' : '' }}>{{ $kecamatan->nama_kecamatan }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('id_kecamatan')
+                                        <div class="invalid-feedback">* {{ $message }}</div>
+                                    @enderror
+                                </div>
 
-                                    <div class="form-group mt-3">
-                                    <div class="row">
-                                        <div class="col-md-12 col-xs-12">
-                                        <label> Deskripsi Sekolah</label>
-                                        <textarea class="form-control" rows="3"></textarea>
-                                        </div>
-                                    </div>
-                                    </div>
+                                <!-- Kode Pos -->
+                                <div class="form-group mt-3 col-md-12">
+                                    <label for="kode_pos">Kode Pos</label>
+                                    <input type="text" class="form-control @error('kode_pos') is-invalid @enderror" id="kode_pos" name="kode_pos" value="{{ old('kode_pos') }}" placeholder="Masukkan Kode Pos">
+                                    @error('kode_pos')
+                                        <div class="invalid-feedback">* {{ $message }}</div>
+                                    @enderror
+                                </div>
 
-                                    <div class="form-group mt-3">
-                                    <div class="row">
-                                        <div class="col-md-12 col-xs-12">
-                                        <label> Alamat</label>
-                                        <textarea class="form-control" rows="3"></textarea>
-                                        </div>
-                                    </div>
-                                    </div>
-
-                                    <div class="form-group mt-3">
-                                    <label for="picture">Foto sitePlan</label>
-                                     <input type="file" class="form-control rounded" id="sitePlan" name="sitePlan">
-                                    </div>
-                                  
-                                    <div class="form-group mt-3">
-                                    <label for="picture">Foto Profil Sekolah</label>
-                                     <input type="file" class="form-control rounded" id="profil_sekolah" name="profil_sekolah">
-                                    </div>
-                                    
-                                    <!-- Tombol Submit -->
-                                    
-                                </form>
-                                
+                                <!-- Tombol Submit -->
+                                <div class="form-group mt-3 col-md-12">
+                                    <button type="submit" class="btn btn-primary mt-4 move-right" style="background-color: #4c45b4; color: white;">Simpan</button>
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-primary mt-4 move-right " style="background-color: #4c45b4; color: white;">Simpan</button>
-                            </div>
-                        </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

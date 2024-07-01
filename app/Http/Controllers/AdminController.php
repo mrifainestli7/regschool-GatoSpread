@@ -52,9 +52,11 @@ class AdminController extends Controller
         ]);
         
         if($request->hasFile('picture')){
-            $picture = time().'_'.$request->file('picture')->getClientOriginalName();
+            $originalNameWithoutExtension = pathinfo($request->file('picture')->getClientOriginalName(), PATHINFO_FILENAME);//ketika akan dihash maka aaka akan berbeda jika tidak pake pathfile
+            $extension = $request->file('picture')->getClientOriginalExtension();
+            $picture = time().'_'.hash('sha256',$originalNameWithoutExtension).'.'.$extension;
             $request->file('picture')->storeAs('public/profile', $picture);
-            $imagePath = "storage/profile".$picture;
+            $imagePath = "storage/profile/".$picture;
         } else {
             $imagePath = 'image/default_profile.png';
         }
@@ -69,13 +71,12 @@ class AdminController extends Controller
             'password' => bcrypt($request->password)
         ]);
 
-        return redirect()->route('tambah-akun')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('admin.home')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     function detailAkun(string $id): View
     {
         $user = User::findOrFail($id);
-        
         return view('admin/detailAkun', compact('user'));
     }
 
@@ -109,12 +110,15 @@ class AdminController extends Controller
 
         $user = User::findOrFail($id);
         if($request->hasFile('picture')){
-            $picture = time().'_'.$request->file('picture')->getClientOriginalName();
+            $originalNameWithoutExtension = pathinfo($request->file('picture')->getClientOriginalName(), PATHINFO_FILENAME);//ketika akan dihash maka aaka akan berbeda jika tidak pake pathfile
+            $extension = $request->file('picture')->getClientOriginalExtension();
+            $picture = time().'_'.hash('sha256',$originalNameWithoutExtension).'.'.$extension;
             $request->file('picture')->storeAs('public/profile', $picture);
             $imagePath = "storage/profile/".$picture;
-
-            Storage::delete('public/profile/1714119559_profile'); //cek jika default_profile bisa dihapus dengna method ini 
             
+            $pfp = str_replace('storage/', '', $user->pfp);
+            Storage::delete('public/'. $pfp);
+                
             if($request->filled('password')){
                 $user->update([
                     'pfp' => $imagePath,
@@ -156,13 +160,13 @@ class AdminController extends Controller
     }
 
     function remove($id){
-         $user = User::findOrFail($id);
-
-         Storage::delete('public/profile/'. $user->pfp);
+        $user = User::findOrFail($id);
+        $pfp = str_replace('storage/', '', $user->pfp);
+        Storage::delete('public/'. $pfp);
  
-         $user->delete();
+        $user->delete();
  
-         return redirect()->route('admin.home')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('admin.home')->with(['success' => 'Data Berhasil Dihapus!']);
     }
     
     function profile(){

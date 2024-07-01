@@ -65,8 +65,7 @@
                                         <div class="error">* {{ $message }}</div>
                                     @enderror
                                     <!-- Tombol Submit -->
-                                    <button type="submit" class="btn btn-primary mt-4 move-right " style="background-color: #4c45b4; color: white;
-                                    ">Simpan</button>
+                                    <button type="submit" class="btn btn-primary mt-4 move-right " style="background-color: #4c45b4; color: white;">Simpan</button>
                                 </form>
                             </div>
                         </div>

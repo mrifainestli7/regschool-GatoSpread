@@ -86,7 +86,12 @@
                                         <div class="text-danger">* {{ $message }}</div>
                                     @enderror
                                     <!-- Tombol Submit -->
-                                    <button type="submit" class="btn btn-primary mt-4" style="background-color: #4c45b4; color: white;">Simpan Perubahan</button>
+
+                                    <button type="submit" class="btn btn-primary mt-4">Ubah data</button>
+                                    <a href="{{ route('admin.hapusAkun', $user->id)}}" class="btn btn-primary mt-4" style="background-color: #d22f2f;">
+                                        <i class="bi bi-hand-index "></i>
+                                        <p2 class="px-2 py-1">Hapus Akun</p2>
+                                    </a>
                                 </form>
                             </div>
                         </div>
