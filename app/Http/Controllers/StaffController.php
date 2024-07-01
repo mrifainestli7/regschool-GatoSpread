@@ -394,6 +394,6 @@ class StaffController extends Controller
         $listTahunAjar = TahunAjar::all();
         $rekap = Rekap::firstOrNew(['id_thnAjar' => $tahunAjar->id_thnAjar,'id_sekolah' => $sekolah->id_sekolah,]);
         $sarpras = Sarpras::firstOrNew(['id_thnAjar' => $tahunAjar->id_thnAjar,'id_sekolah' => $sekolah->id_sekolah,]);
-        return view('staff.profile_sekolah', compact('sekolah', 'tahunAjar', 'listTahunAjar','rekap','sarpras'));
+        return view('staff.profile', compact('sekolah', 'tahunAjar', 'listTahunAjar','rekap','sarpras'));
     }
 }
