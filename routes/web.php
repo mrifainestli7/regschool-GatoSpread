@@ -31,13 +31,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/staff/hapus-sekolah/{id_sekolah}', [StaffController::class, 'hapusSekolah'])->middleware('userAkses:staff');
     // Route::get('/staff/profile', [StaffController::class, 'profile'])->middleware('userAkses:staff');
     Route::get('/staff/profile_sekolah/{id_sekolah}/{id_tahunajar?}', [StaffController::class, 'profileSekolah'])->middleware('userAkses:staff')->name('staff.profile_sekolah');
-    Route::get('/staff/tambah-rekap/{id_sekolah}/{id_tahunajar}', [StaffController::class, 'tambahRekap'])->middleware('userAkses:staff');
+    Route::get('/staff/tambah-rekap/{id_sekolah}/{id_tahunajar}', [StaffController::class, 'tambahRekap'])->middleware('userAkses:staff')->name('staff.tambah_rekap');
     Route::post('/staff/tambah-rekap/{id_sekolah}/{id_tahunajar}', [StaffController::class, 'createRekap'])->middleware('userAkses:staff');
-    Route::get('/staff/ubah-rekap/{id_rekap}', [StaffController::class, 'ubahRekap'])->middleware('userAkses:staff');
+    Route::get('/staff/ubah-rekap/{id_rekap}', [StaffController::class, 'ubahRekap'])->middleware('userAkses:staff')->name('staff.ubah_rekap');
     Route::post('/staff/ubah-rekap/{id_rekap}', [StaffController::class, 'updateRekap'])->middleware('userAkses:staff');
-    Route::get('/staff/tambah-sarpras/{id_sekolah}/{id_tahunajar}', [StaffController::class, 'tambahSarpras'])->middleware('userAkses:staff');
+    Route::get('/staff/tambah-sarpras/{id_sekolah}/{id_tahunajar}', [StaffController::class, 'tambahSarpras'])->middleware('userAkses:staff')->name('staff.tambah_sarpras');
     Route::post('/staff/tambah-sarpras/{id_sekolah}/{id_tahunajar}', [StaffController::class, 'createSarpras'])->middleware('userAkses:staff');
-    Route::get('/staff/ubah-sarpras/{id_sarpras}', [StaffController::class, 'ubahSarpras'])->middleware('userAkses:staff');
+    Route::get('/staff/ubah-sarpras/{id_sarpras}', [StaffController::class, 'ubahSarpras'])->middleware('userAkses:staff')->name('staff.ubah_sarpras');
     Route::post('/staff/ubah-sarpras/{id_sarpras}', [StaffController::class, 'updateSarpras'])->middleware('userAkses:staff');
 
     Route::get('/admin', [AdminController::class, 'index'])->middleware('userAkses:admin');
