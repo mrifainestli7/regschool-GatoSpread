@@ -1,255 +1,105 @@
 @extends('layouts.main')
 
 @section('container')
+<head>   
+    <title>Dashboard</title>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+</head>
     <div class="container-fluid">
         <div class="mb-3">
-            <h4 class="mt-2 mb-4">Profile</h4>
-
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <h4 class="mt-2 mb-4">Dashboard Data Sekolah</h4>
             <div class="card">
-                <div class="card-body" style="background-color: #4c45b4; border-radius: 8px 8px 0 0; padding: 20px;height: 80px">
-                    <div class="row justify-content-between">
-                        <div class="col-md-1 col-2">
-                            
-                            <img src="{{asset('/image/sekolah.png')}}" alt="User Avatar" class="rounded position-absolute" style="width: 120px;">
-                        </div>
-                        <div class="container">
-                            <div class="row justify-content-end">
-                                <div class="col-md-2 col-9">
-                                <div class="dropdown ml-auto">
-                                    <li class="nav-item dropdown">
-                                    <a class="btn btn-secondary dropdown-toggle rounded-4" style="background-color: #4c45b4" data-bs-toggle="dropdown" 
-                                        id="dropdownMenuButton" href="#" role="button" aria-expanded="false">AKSI</a>
-                                    <ul class="dropdown-menu rounded-4" aria-labelledby="dropdownMenuButton">
-                                        <li><a class="dropdown-item" href="#">Tambah Data Rekap</a></li>
-                                        <li><a class="dropdown-item" href="#">Ubah Data Rekap</a></li>
-                                        <li><a class="dropdown-item" href="#">Tambah Data Sarpras </a></li>
-                                        <li><a class="dropdown-item" href="#">Ubah Data Sarpras</a></li>
-                                        <li><a class="dropdown-item" href="#">Ubah Data Sekolah</a></li>
-                                        <li><a class="dropdown-item" href="#">Hapus Data Sekolah </a></li>
-                                    </ul>
-                                    </li>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-
-                        
-                    </div>
-                </div>
-                <div class="card-footer" style="background-color: white; border-radius: 0 0 8px 8px;height: 120px">
-                    <div class="row justify-content-end">
-                    <div class="border-top user-social-box">
-                    <div class="card-body p-3 position-absolute bottom-0 start-0">
-                        <div class="container mt-1">
-                            <div class="container result-containe ">
-
-                            <h5 class="mb-1">SDN 1061666 PATAUMBAK</h5>
-                            <p class="mb-0">Kebutuhan Ruang Kelas : 1</p>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-              
-                            <div class="container">
-                            <div class="row justify-content-end">
-                                <div class="col-md-2 col-9">
-                                <div class="dropdown ml-auto">
-                                    <li class="nav-item dropdown">
-                                    <a class="btn btn-secondary dropdown-toggle rounded-4" style="background-color: #4c45b4" data-bs-toggle="dropdown" 
-                                        id="dropdownMenuButton" href="#" role="button" aria-expanded="false">AKSI</a>
-                                    <ul class="dropdown-menu rounded-4" aria-labelledby="dropdownMenuButton">
-                                        <li><a class="dropdown-item" href="#">Tambah Data Rekap</a></li>
-                                        <li><a class="dropdown-item" href="#">Ubah Data Rekap</a></li>
-                                        <li><a class="dropdown-item" href="#">Tambah Data Sarpras </a></li>
-                                        <li><a class="dropdown-item" href="#">Ubah Data Sarpras</a></li>
-                                        <li><a class="dropdown-item" href="#">Ubah Data Sekolah</a></li>
-                                        <li><a class="dropdown-item" href="#">Hapus Data Sekolah </a></li>
-                                    </ul>
-                                    </li>
-                                </div>
-                                </div>
-                            </div>
-                    
-                        </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="example" class="table table-striped table-bordered first">
+                            <thead>
+                                <tr>
+                                    <th>Nama Sekolah</th>
+                                    <th>NPSN</th>
+                                    <th>Status</th>
+                                    <th>Rombel</th>
+                                    <th>Ruang Kelas</th>
+                                    <th>Jumlah Murid</th>
+                                    <th>Kebutuhan RKB</th>
+                                    <th>Jumlah Guru</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SDN 08 PATUMBAK</td>
+                                    <td>2100018345</td>
+                                    <td>Negeri</td>
+                                    <td>10</td>
+                                    <td>8</td>
+                                    <td>240</td>
+                                    <td>2</td>
+                                    <td>20</td>
+                                </tr>
+                                <!-- Additional rows here -->
+                                <tr>
+                                    <td>SD 02 PATUMBAK</td>
+                                    <td>2100018345</td>
+                                    <td>Swasta</td>
+                                    <td>10</td>
+                                    <td>8</td>
+                                    <td>240</td>
+                                    <td>2</td>
+                                    <td>20</td>
+                                </tr>
+                                <tr>
+                                    <td>SDN 01 PATUMBAK</td>
+                                    <td>2100018345</td>
+                                    <td>Negeri</td>
+                                    <td>6</td>
+                                    <td>20</td>
+                                    <td>240</td>
+                                    <td>2</td>
+                                    <td>20</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Nama Sekolah</th>
+                                    <th>NPSN</th>
+                                    <th>Status</th>
+                                    <th>Rombel</th>
+                                    <th>Ruang Kelas</th>
+                                    <th>Jumlah Murid</th>
+                                    <th>Kebutuhan RKB</th>
+                                    <th>Jumlah Guru</th>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
             </div>
-     </div>
-<!-- Nav pills -->
-<style>
-    .nav-tabs .nav-link.active {
-      background:#f68365;
-      color: white;
-    }
-  </style>
-
-  <ul class="nav nav-tabs nav-justified col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3">
-    <li class="nav-item">
-      <a class="nav-link active" data-bs-toggle="pill" href="#home">Rekap Data</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="pill" href="#menu1">Rekap Perasarana</a>
-    </li>
-  </ul>
-
-
-
-<!-- Tab panes -->
-<div class="tab-content">
-  <div class="tab-pane container active p-0" id="home">
-    
-<div class="row">
-    <div class="col-xl-6 col-lg-8 col-md-8 col-sm-12 col-12">
-        <div class="card"style=" height: 250px;" >
-            <div class="card-body p-3">
-                <div class="container mt-1">
-                    <div class="container result-containe ">
-                        <h4 class="result-title">Deskripsi Sekolah</h4>
-                        <p class="mb-1">NPSN : 3423748798670787</p>
-                        <p class="mb-1">Tingkat Pendidikan : SD</p>
-                        <p class="mb-1">Status : Negri</p>
-                        <p class="mb-1">Alamat : Jl. Tentara Pelajar No.12, RW.001, Bumijo, Kec. Jetis, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55231</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-xl-6 col-lg-8 col-md-8 col-sm-12 col-12">
-        <div class="card" style=" height: 250px;" >
-            <div class="card-body p-3">
-                <div class="container mt-1">
-                    <div class="container result-containe ">
-                        <h4 class="result-title">Alamat Sekolah</h4>
-                        <p class="small text-muted mb-1"><strong>Alamat : Jl. Tentara Pelajar No.12, RW.001, Bumijo, Kec. Jetis, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55231</strong></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-    
-    
-<div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12 col-lg-6 col-md-6 col-sm-12 col-12">
-    <div class="card" >
-        <div class="card-body p-3">
-          <div class="container mt-1">
-            <div class="container result-containe">
-                <div class="row align-items-center  mt-3">
-                    <div class="col">
-                        <h4 class="result-title">Data Tahun Ajar </h4>
-                    </div>
-                </div>   
-                    <div class="row">
-                        <div class="col-md-4">
-                            <p><strong>Akreditasi:</strong> A</p>
-                            <p><strong>Nama Kepala Sekolah:</strong> Budi Santoso</p>
-                            <p><strong>No HP:</strong> 081234567890</p>
-                            <p><strong>Jumlah Rombongan Belajar:</strong> 20</p>
-                        </div>
-                        <div class="col-md-4">
-                            <p><strong>Jumlah Murid:</strong> 500</p>
-                            <p><strong>Laki-laki:</strong> 250</p>
-                            <p><strong>Perempuan:</strong> 240</p>
-                            <p><strong>Non Gender:</strong> 10</p>
-                        </div>
-                        <div class="col md-4">
-                            <p><strong>Jumlah Guru:</strong> 50</p>
-                            <p><strong>Laki-laki:</strong> 20</p>
-                            <p><strong>Perempuan:</strong> 25</p>
-                            <p><strong>Non Gender:</strong> 5</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12 col-lg-6 col-md-6 col-sm-12 col-12">
-    <div class="card" >
-        <div class="card-body p-3">
-            <div class="container result-containe ">
-                <h4 class="result-title">Deskripsi Sekolah</h4>
-                <p class="small text-muted mb-1"><strong>SMA SWASTA PEMBANGUNAN GALANG adalah salah satu satuan pendidikan dengan jenjang SMA di Galang Kota, Kec. Galang, Kab. Deli Serdang, Sumatera Utara. Dalam menjalankan kegiatannya, SMA SWASTA PEMBANGUNAN GALANG berada di bawah naungan Kementerian Pendidikan dan Kebudayaan.</strong></p>
-                <p class="small text-muted mb-1"><strong>SMA SWASTA PEMBANGUNAN GALANG adalah salah satu satuan pendidikan dengan jenjang SMA di Galang Kota, Kec. Galang, Kab. Deli Serdang, Sumatera Utara. Dalam menjalankan kegiatannya, SMA SWASTA PEMBANGUNAN GALANG berada di bawah naungan Kementerian Pendidikan dan Kebudayaan.</strong></p>
-            </div>
-        </div>
-    </div>
-</div>
-
-</div>
-
-  </div>
-  <div class="tab-pane container fade  p-0 " id="menu1">
-  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-    <div class="card">
-        <h5 class="card-header">Detail Sarana</h5>
-        <div class="card-body">
-            <div class="table-responsive ">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">NO</th>
-                            <th scope="col">Jenis Sarana</th>
-                            <th scope="col">Jumlah</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Ruang Kelas</td>
-                            <td>9</td>       
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Ruang Perpustakaan</td>
-                            <td>3</td> 
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-    <div class="card">
-        <h5 class="card-header">Detail Pra-Sarana</h5>
-        <div class="card-body">
-            <div class="table-responsive ">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">NO</th>
-                            <th scope="col">Jenis Sarana</th>
-                            <th scope="col">Jumlah</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Paving blok</td>
-                            <td>9</td>       
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Pagar</td>
-                            <td>3</td> 
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-  </div>
-
-
-  
-
-
         </div>
     </div>
 @endsection
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<!-- DataTables Buttons JS -->
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+<!-- DataTables ColVis JS -->
+<script src="https://cdn.datatables.net/colvis/1.1.3/js/dataTables.colVis.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable({
+        dom: '<"top"lBf><"br">rt<"bottom"ip><"clear">',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'
+        ]
+    });
+});
+</script>

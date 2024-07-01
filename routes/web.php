@@ -49,6 +49,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/detail-akun/{id}', [AdminController::class, 'editAkun'])->middleware('userAkses:admin');
     Route::get('/admin/profile', [AdminController::class, 'profile'])->middleware('userAkses:admin');
 
+    //rifal febiyan
+    // Route untuk menghapus akun admin
+     Route::delete('/admin/detail-akun/{id}', [AdminController::class, 'destroy'])->middleware('userAkses:admin')->name('admin.delete');
+
     Route::get('/logout', [SesiController::class, 'logout']);
 });
 

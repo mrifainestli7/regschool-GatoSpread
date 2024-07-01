@@ -27,7 +27,9 @@ li {
 h4 {
     font-family: 'Poppins', sans-serif;
     font-size: 1.275rem;
-    color: var(--bs-emphasis-color);
+    /*color: var(--bs-emphasis-color);*/
+    color:#2e296c;
+    font-weight: bold;
 }
 
 /* Layout for admin dashboard skeleton */
@@ -240,3 +242,8 @@ html[data-bs-theme="light"] .theme-toggle .fa-sun {
 }
 */
 
+.profile-border {
+    border: 2px solid #b6b5c5; /* Warna dan ketebalan border */
+    border-radius: 5%; /* Membuat border menjadi lingkaran jika gambar berbentuk persegi */
+   
+}
