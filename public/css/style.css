@@ -45,7 +45,6 @@ h4 {
     min-width: 264px;
     background: #4c45b4;
     transition: all 0.35s ease-in-out;
-    position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
@@ -64,8 +63,6 @@ h4 {
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     width: 100%;
-    background: #F3F4FF;
-    margin-left: 250px; /* Sesuaikan dengan lebar sidebar */
    
 }
 
