@@ -8,7 +8,8 @@ class StaffController extends Controller
 {
     function index()
     {
-        return view('staff.home');
+        $sekolahs = Sekolah::with(['sarpras', 'rekap'])->get();
+        return view('staff.home', compact('sekolahs'));
     }
     function tambahSekolah(){
         return view('staff.inputsekolah');
