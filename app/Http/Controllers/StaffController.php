@@ -12,6 +12,8 @@ class StaffController extends Controller
         return view('staff.home', compact('sekolahs'));
     }
     function tambahSekolah(){
+        
+        
         return view('staff.inputsekolah');
     }
     function profile(){

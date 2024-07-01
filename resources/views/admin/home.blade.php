@@ -5,7 +5,7 @@
         <div class="mb-3">
             <h4 class="mt-2 mb-4">Kelola Akun</h4>
             {{-- start here --}}
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="shadow col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 rounded">
                             <div class="card " >
                                 <div class="card-body">
                                     <div class="table-responsive ">
