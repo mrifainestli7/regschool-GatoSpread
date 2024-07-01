@@ -16,15 +16,15 @@ class SekolahSeeder extends Seeder
         $Datas = [
             [
                 'nama_sekolah' => 'SDN 1 Pantai Labu',
-                'alamat_sekolah' => 'pantai labu',
-                'deskripsi_sekolah' => 'sekolah dasar negeri di pantai labu',
+                'npsn' => '12345678',
+                'deskripsi' => 'Sekolah dasar negeri di Pantai Labu',
+                'status' => 'Negeri',
                 'id_kecamatan' => 9,
-            ],
-            [
-                'nama_sekolah' => 'SDN 1 sunggal',
-                'alamat_sekolah' => 'sunggal',
-                'deskripsi_sekolah' => 'sekolah dasar negeri di sunggal',
-                'id_kecamatan' => 1,
+                'alamat' => 'Jl. Pantai Labu No.1',
+                'rt' => '01',
+                'rw' => '02',
+                'kelurahan_desa' => 'Pantai Labu',
+                'kode_pos' => '20353',
             ]
         ];
 

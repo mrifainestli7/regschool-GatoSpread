@@ -28,4 +28,4 @@ function isLight(){
 
 if(isLight()){
     toggleRootClass();
-}
+}   

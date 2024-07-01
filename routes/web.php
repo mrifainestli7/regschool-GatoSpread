@@ -25,9 +25,6 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/staff/home', [StaffController::class, 'index'])->middleware('userAkses:staff');
     Route::get('/staff/tambah-sekolah', [StaffController::class, 'tambahSekolah'])->middleware('userAkses:staff');
-<<<<<<< Updated upstream
-    Route::get('/staff/profile', [StaffController::class, 'profile'])->middleware('userAkses:staff');
-=======
     Route::post('/staff/tambah-sekolah', [StaffController::class, 'createSekolah'])->middleware('userAkses:staff');
     Route::get('/staff/ubah-sekolah/{id_sekolah}', [StaffController::class, 'ubahSekolah'])->middleware('userAkses:staff');
     Route::post('/staff/ubah-sekolah/{id_sekolah}', [StaffController::class, 'updateSekolah'])->middleware('userAkses:staff');
@@ -42,7 +39,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/staff/tambah-sarpras/{id_sekolah}/{id_tahunajar}', [StaffController::class, 'createSarpras'])->middleware('userAkses:staff');
     Route::get('/staff/ubah-sarpras/{id_sarpras}', [StaffController::class, 'ubahSarpras'])->middleware('userAkses:staff');
     Route::post('/staff/ubah-sarpras/{id_sarpras}', [StaffController::class, 'updateSarpras'])->middleware('userAkses:staff');
->>>>>>> Stashed changes
 
     Route::get('/admin', [AdminController::class, 'index'])->middleware('userAkses:admin');
     Route::get('/admin/home', [AdminController::class, 'index'])->middleware('userAkses:admin')->name('admin.home');

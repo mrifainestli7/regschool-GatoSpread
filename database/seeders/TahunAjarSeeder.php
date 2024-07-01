@@ -15,15 +15,17 @@ class TahunAjarSeeder extends Seeder
     {
         $Datas = [
             [
-                'namaKepsek' => 'Hartono Siregar',
-                'noHpKepsep' => '+628135465254',
-                'jmlGuruHonor' => 15,
-                'jmlGuruPNS' => 9,
-                'jmlRombel' => 14,
-                'jmlMurid' => 5,
-                'id_sekolah' => 2,
+                'tahunAjar1' => 2021,
+                'tahunAjar2' => 2022,
             ],
-            
+            [
+                'tahunAjar1' => 2022,
+                'tahunAjar2' => 2023,
+            ],
+            [
+                'tahunAjar1' => 2023,
+                'tahunAjar2' => 2024,
+            ],
         ];
 
         foreach ($Datas as $key => $val) {

@@ -1,12 +1,6 @@
 @extends('layouts.main')
 
 @section('container')
-<<<<<<< Updated upstream
-    <div class="container-fluid">
-        <div class="mb-3">
-            <h4 class="mt-2 mb-4">Dashboard</h4>
-            
-=======
 <head>
     <title>Dashboard</title>
     <!-- DataTables CSS -->
@@ -66,7 +60,6 @@
                     </div>
                 </div>
             </div>
->>>>>>> Stashed changes
         </div>
     </div>
 @endsection
