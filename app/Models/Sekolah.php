@@ -15,9 +15,15 @@ class Sekolah extends Model
     protected $keyType = 'bigInteger';
     protected $fillable = [
         'nama_sekolah',
-        'alamat_sekolah',
-        'deskripsi_sekolah',
-        'id_kecamatan'
+        'npsn',
+        'deskripsi',
+        'status',
+        'alamat',
+        'rt',
+        'rw',
+        'kelurahan_desa',
+        'id_kecamatan',
+        'kode_pos',
     ];
 
     public function kecamatan(): BelongsTo

@@ -11,16 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tahunajar', function (Blueprint $table) {
-            $table->id('id_thnAjar');
+        Schema::create('rekap', function (Blueprint $table) {
+            $table->id('id_rekap');
+            $table->string('akreditasi');
             $table->string('namaKepsek');
-            $table->string('noHpKepsep');
+            $table->string('noHpKepsek');
             $table->integer('jmlGuruHonor');
             $table->integer('jmlGuruPNS');
             $table->integer('jmlRombel');
-            $table->integer('jmlMurid');
+            $table->integer('jmlMuridPria');
+            $table->integer('jmlMuridWanita');
             $table->unsignedBigInteger('id_sekolah');
             $table->foreign('id_sekolah')->references('id_sekolah')->on('sekolah')->onDelete('cascade');
+            $table->unsignedBigInteger('id_thnAjar');
+            $table->foreign('id_thnAjar')->references('id_thnAjar')->on('tahun_ajar')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tahun_ajars');
+        Schema::dropIfExists('rekap');
     }
 };

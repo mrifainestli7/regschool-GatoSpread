@@ -16,6 +16,7 @@ class Kecamatan extends Model
     protected $keyType = 'bigInteger';
 
     protected $fillable = [
+        'id_kecamatan',
         'nama_kecamatan'
     ];
 }
