@@ -43,7 +43,7 @@
                                         <li><a class="dropdown-item" href="{{ route('staff.tambah_sarpras', ['id_sekolah' => $sekolah->id_sekolah, 'id_tahunajar' => $tahunAjar->id_thnAjar]) }}">Tambah Data Sarpras </a></li>
                                         <li><a class="dropdown-item" href="{{ route('staff.ubah_sarpras', ['id_sarpras' => $sarpras->id_sarpras ?? 0]) }}">Ubah Data Sarpras</a></li>
                                         <li><a class="dropdown-item" href="#">Ubah Data Sekolah</a></li>
-                                        <li><a class="dropdown-item" href="#">Hapus Data Sekolah </a></li>
+                                        <li><a class="dropdown-item" href="{{ route('staff.hapus_sekolah', ['id_sekolah' => $sekolah->id_sekolah ?? 0]) }}">Hapus Data Sekolah </a></li>
                                     </ul>
                                     </li>
                                 </div>
