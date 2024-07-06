@@ -392,9 +392,10 @@ class StaffController extends Controller
             $tahunAjar = TahunAjar::orderBy('id_thnAjar', 'desc')->first();
         }
         if (!$sekolah || !$tahunAjar) {abort(404,);}
-        $listTahunAjar = TahunAjar::all();
+        $listTahunAjar = TahunAjar::all();//untuk dropdown 
         $rekap = Rekap::firstOrNew(['id_thnAjar' => $tahunAjar->id_thnAjar,'id_sekolah' => $sekolah->id_sekolah,]);
         $sarpras = Sarpras::firstOrNew(['id_thnAjar' => $tahunAjar->id_thnAjar,'id_sekolah' => $sekolah->id_sekolah,]);
-        return view('staff.profile', compact('sekolah', 'tahunAjar', 'listTahunAjar','rekap','sarpras'));
+        $kec = Kecamatan::firstOrNew(['id_kecamatan' => $sekolah->id_kecamatan]);
+        return view('staff.profile_sekolah', compact('sekolah', 'tahunAjar', 'listTahunAjar','rekap','sarpras','kec'));
     }
 }
