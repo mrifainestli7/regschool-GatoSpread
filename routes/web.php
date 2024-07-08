@@ -25,7 +25,7 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/staff/home', [StaffController::class, 'index'])->middleware('userAkses:staff')->name('staff.home');
-    Route::get('/staff/home/{id_Kec}/sekolah', [StaffController::class, 'daftarSekolah'])->name('staff.daftarSekolah');
+    Route::get('/staff/home/{id_Kec}/sekolah/{id_thnAjar?}', [StaffController::class, 'daftarSekolah'])->name('staff.daftarSekolah');
     Route::get('/staff/tambah-sekolah', [StaffController::class, 'tambahSekolah'])->middleware('userAkses:staff');
     Route::post('/staff/tambah-sekolah', [StaffController::class, 'createSekolah'])->middleware('userAkses:staff');
     Route::get('/staff/ubah-sekolah/{id_sekolah}', [StaffController::class, 'ubahSekolah'])->middleware('userAkses:staff')->name('staff.ubah_sekolah');
@@ -45,6 +45,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->middleware('userAkses:admin');
     Route::get('/admin/home', [AdminController::class, 'index'])->middleware('userAkses:admin')->name('admin.home');
     Route::get('/admin/tambah-akun', [AdminController::class, 'tambahAkun'])->middleware('userAkses:admin')->name('admin.tambahAkun');
+    Route::get('/admin/tambah-akun', [AdminController::class, 'tambahAkun'])->middleware('userAkses:admin')->name('admin.tambahAkun');
+    Route::get('/admin/kelola_tahunAjar', [AdminController::class, 'tahunAjar'])->middleware('userAkses:admin')->name('admin.kelolaTahun');
+    Route::post('/admin/kelola_tahunAjar', [AdminController::class, 'tambahTahun'])->middleware('userAkses:admin')->name('admin.tambahTahun');
+    Route::get('/admin/ubah_tahunAjar/{id}', [AdminController::class, 'ubahTahun'])->middleware('userAkses:admin')->name('admin.ubahTahun');
+    Route::post('/admin/ubah_tahunAjar/{id}', [AdminController::class, 'updateTahun'])->middleware('userAkses:admin')->name('admin.updateTahun');
     Route::post('/admin/tambah-akun', [AdminController::class, 'setAkun'])->middleware('userAkses:admin')->name('admin.tambahAkun');
     Route::get('/admin/detail-akun/{id}', [AdminController::class, 'detailAkun'])->middleware('userAkses:admin')->name('admin.detail-akun');
     Route::post('/admin/detail-akun/{id}', [AdminController::class, 'editAkun'])->middleware('userAkses:admin');

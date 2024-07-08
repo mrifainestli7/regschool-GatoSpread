@@ -10,7 +10,6 @@
                 <div class="card-body" style="background-color: #4c45b4; border-radius: 8px 8px 0 0; padding: 20px;height: 80px">
                     <div class="row justify-content-between">
                         <div class="col-md-1 col-2">
-                            
                             <img src="{{asset('/image/sekolah.png')}}" alt="User Avatar" class="rounded position-absolute" style="width: 120px;">
                         </div>
                         <div class="container">

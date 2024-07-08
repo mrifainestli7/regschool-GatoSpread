@@ -25,22 +25,23 @@
                                             @forelse ($datas as $key => $data)
                                                 <tr>
                                                     <th class="text-center">
-                                                        <div class="user-avatar float-xl-left pr-4 float-none">
-                                                             <img src="{{ asset($data->pfp) }}" alt="User Avatar" class="rounded-circle user-avatar-xl"  style="width: 30px ;">
+                                                        <div class="d-flex align-items-center justify-content-center" style="height: 50px;">
+                                                            <img src="{{ asset($data->pfp) }}" alt="User Avatar" class="rounded-circle user-avatar-xl border" style="width: 30px; height: 30px;">
                                                         </div>
                                                     </th>
-                                                        <td class='align-middle'>{{ $data->nip }}</td>
-                                                        <td class="text-center align-middle">{{ $data->name }}</td>
-                                                        <td class="text-center align-middle">{{ $data->email }}</td>
-                                                        <td class="text-center align-middle">{{ $data->phone }}</td>
-                                                        <td class="text-center align-middle">{{ \Carbon\Carbon::parse($data->created_at)->isoFormat('dddd, D MMMM YYYY') }}</td>
+                                                    <td class='align-middle'>{{ $data->nip }}</td>
+                                                    <td class="text-center align-middle">{{ $data->name }}</td>
+                                                    <td class="text-center align-middle">{{ $data->email }}</td>
+                                                    <td class="text-center align-middle">{{ $data->phone }}</td>
+                                                    <td class="text-center align-middle">{{ \Carbon\Carbon::parse($data->created_at)->isoFormat('dddd, D MMMM YYYY') }}</td>
                                                     <td class="text-center align-middle">
                                                         <a href="{{ route('admin.detail-akun', $data->id)}}" class="btn btn-success btn-sm rounded-4 mx-2 my-2" style="background-color: #4c45b4;">
                                                             <i class="bi bi-hand-index "></i>
-                                                            <p2 class="px-2 py-1">Detail</p2>
+                                                            <span class="px-2 py-1">Detail</span>
                                                         </a>
                                                     </td>
                                                 </tr>
+                                            
                                                 @empty
                                                 <div class="alert alert-danger"> Data Post belum Tersedia.</div>
                                             @endforelse

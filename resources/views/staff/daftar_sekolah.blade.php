@@ -9,7 +9,7 @@
 </head>
     <div class="container-fluid">
         <div class="mb-3">
-            <h4 class="mt-2 mb-4">Sekolah Dasar di {{ $kecamatan->nama_kecamatan }}</h4>
+            <h4 class="mt-2 mb-2">Sekolah Dasar di {{ $kecamatan->nama_kecamatan }}</h4>
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
