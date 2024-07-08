@@ -11,15 +11,25 @@ use Illuminate\Http\Request;
 
 class StaffController extends Controller
 {
-    function index()
-    {
-        $sekolahs = Sekolah::with(['sarpras', 'rekap'])->get();
-        return view('staff.home', compact('sekolahs'));
+    function index(){
+        $kecamatans = Kecamatan::with('sekolah')->get();
+        return view('staff.home', compact('kecamatans'));
+        // $sekolahs = Sekolah::with(['sarpras', 'rekap'])->get();
+        // return view('staff.home', compact('sekolahs'));
     }
+
+    function daftarSekolah($id_Kec){
+        $kecamatan = Kecamatan::findOrFail($id_Kec);  
+        $sekolahs = Sekolah::with(['sarpras', 'rekap'])->where('id_kecamatan', $id_Kec)->get();
+        //pisahkan sarpas dan rekapnya dari sekolah
+        return view('staff.daftar_sekolah', compact('kecamatan', 'sekolahs'));
+    }
+    
     function tambahSekolah(){
         $kecamatans = Kecamatan::all();
         return view('staff.inputsekolah', compact('kecamatans'));
     }
+    
     function createSekolah(Request $request): RedirectResponse {
         $this->validate($request, [
             'nama_sekolah' => 'required|string|max:255',
@@ -129,8 +139,7 @@ class StaffController extends Controller
         return redirect()->route('staff.profile_sekolah', ['id_sekolah' => $sekolah->id_sekolah])->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
-    public function hapusSekolah($id_sekolah): RedirectResponse
-    {
+    function hapusSekolah($id_sekolah): RedirectResponse {
         $sekolah = Sekolah::find($id_sekolah);
         if (!$sekolah) {abort(404, 'Sekolah tidak ditemukan');}
         $sekolah->delete();
@@ -199,15 +208,13 @@ class StaffController extends Controller
         ])->with('success', 'Data Berhasil Disimpan!');
     }
 
-    function ubahRekap($id_rekap)
-    {
+    function ubahRekap($id_rekap) {
         $data = Rekap::where('id_rekap', $id_rekap)->first();
         if (!$data) {abort(404); }
         return view('staff.ubah_rekap', compact('data'));
     }
 
-    function updateRekap(Request $request, $id_rekap)
-    {
+    function updateRekap(Request $request, $id_rekap) {
         $this->validate($request, [
             'akreditasi' => 'max:255',
             'namaKepsek' => 'required|string|max:255',
@@ -254,8 +261,7 @@ class StaffController extends Controller
         ])->with('success', 'Data Berhasil Diperbarui!');
     }
 
-    function tambahSarpras($id_sekolah, $id_tahunajar)
-    {
+    function tambahSarpras($id_sekolah, $id_tahunajar) {
         $sarpras = Sarpras::where('id_sekolah', $id_sekolah)->where('id_thnAjar', $id_tahunajar)->first();
         if ($sarpras) {
             return redirect()->route('staff.profile_sekolah', [
@@ -321,15 +327,13 @@ class StaffController extends Controller
         ])->with('success', 'Data Berhasil Disimpan!');
     }
     
-    function ubahSarpras($id_sarpras)
-    {
+    function ubahSarpras($id_sarpras) {
         $data = Sarpras::where('id_sarpras', $id_sarpras)->first();
         if (!$data) {abort(404); }
         return view('staff.ubah_sarpras', compact('data'));
     }
 
-    public function updateSarpras(Request $request, $id_sarpras)
-    {
+    function updateSarpras(Request $request, $id_sarpras) {
         $this->validate($request, [
             'jmlh_rk' => 'required|integer',
             'jmlh_perpus' => 'required|integer',
@@ -384,7 +388,7 @@ class StaffController extends Controller
         ])->with('success', 'Data Berhasil Diperbarui!');
     }
     
-    function profileSekolah($id_sekolah, $id_thnAjar = null){
+    function profileSekolah($id_sekolah, $id_thnAjar = null) {
         $sekolah = Sekolah::where('id_sekolah', $id_sekolah)->first();
         if ($id_thnAjar) {
             $tahunAjar = TahunAjar::where('id_thnAjar', $id_thnAjar)->first();
@@ -392,10 +396,11 @@ class StaffController extends Controller
             $tahunAjar = TahunAjar::orderBy('id_thnAjar', 'desc')->first();
         }
         if (!$sekolah || !$tahunAjar) {abort(404,);}
-        $listTahunAjar = TahunAjar::all();//untuk dropdown 
+        $listTahunAjar = TahunAjar::all();
         $rekap = Rekap::firstOrNew(['id_thnAjar' => $tahunAjar->id_thnAjar,'id_sekolah' => $sekolah->id_sekolah,]);
         $sarpras = Sarpras::firstOrNew(['id_thnAjar' => $tahunAjar->id_thnAjar,'id_sekolah' => $sekolah->id_sekolah,]);
         $kec = Kecamatan::firstOrNew(['id_kecamatan' => $sekolah->id_kecamatan]);
-        return view('staff.profile_sekolah', compact('sekolah', 'tahunAjar', 'listTahunAjar','rekap','sarpras','kec'));
+        $kebutuhan_rk = max($rekap->jmlRombel - $sarpras->jmlh_rk, 0);
+        return view('staff.profile_sekolah', compact('sekolah', 'tahunAjar', 'listTahunAjar','rekap','sarpras','kec', 'kebutuhan_rk'));
     }
 }

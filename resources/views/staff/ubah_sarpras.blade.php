@@ -3,11 +3,11 @@
 @section('container')
     <div class="container-fluid">
         <div class="mb-3">
-            <h4 class="mt-2 mb-4">Edit Data Sarana dan Pra-sarana</h4>
+            <h4 class="mt-2 mb-4">Ubah Data Sarana dan Pra-sarana</h4>
             <div class="col-md-17">
                 <div class="card">
                     <div class="card-header" style="background-color: #4c45b4; color: white;">
-                        Edit Data Sarana dan Pra-sarana
+                        Ubah Data Sarana dan Pra-sarana
                     </div>
                     <div class="card-body">
                         <form action="" method="POST">

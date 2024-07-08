@@ -1,50 +1,60 @@
 @extends('layouts.main')
 
 @section('container')
-<head>   
-    <title>Dashboard</title>
+<head>
+    <title>Sekolah di {{ $kecamatan->nama_kecamatan }}</title>
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
 </head>
     <div class="container-fluid">
         <div class="mb-3">
-            <h4 class="mt-2 mb-4">Daftar Kecamatan</h4>
+            <h4 class="mt-2 mb-4">Sekolah Dasar di {{ $kecamatan->nama_kecamatan }}</h4>
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example" class="table table-striped table-bordered first">
                             <thead>
                                 <tr>
-                                    <th>No. </th>
-                                    <th>Nama Kecamatan</th>
-                                    <th>Jumlah SD Negeri</th>
-                                    <th>Jumlah SD Swasta</th>
-                                    <th>Total SD</th>
+                                    <th>NPSN</th>
+                                    <th>Nama Sekolah</th>
+                                    <th>Status</th>
+                                    <th>Jumlah Guru</th>
+                                    <th>Jumlah Murid</th>
+                                    <th>Rombel</th>
+                                    <th>Ruang Kelas</th>
+                                    <th>Kebutuhan RKB</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($kecamatans as $key => $kecamatan)
+                                @foreach ($sekolahs as $sekolah)
                                 <tr>
-                                    <td class="text-center">{{ $key + 1 }}</td>
-                                    <td><a href="{{ route('staff.daftarSekolah', $kecamatan->id_kecamatan) }}">{{ $kecamatan->nama_kecamatan }}</a></td>
-                                    <td class="text-center">{{ $kecamatan->jumlahNegeri() }}</td>
-                                    <td class="text-center">{{ $kecamatan->jumlahSwasta() }}</td>
-                                    <td class="text-center">{{ $kecamatan->jumlahSekolah() }}</td>
+                                    <td>{{ $sekolah->npsn }}</td>
+                                    <td>
+                                        <a href="{{ route('staff.profile_sekolah', ['id_sekolah' => $sekolah->id_sekolah]) }}">
+                                            {{ $sekolah->nama_sekolah }}
+                                        </a>
+                                    </td>
+                                    <td>{{ $sekolah->status }}</td>
+                                    <td>{{ $sekolah->rekap ? ($sekolah->rekap->jmlGuruHonor + $sekolah->rekap->jmlGuruPNS) : '-' }}</td>
+                                    <td>{{ $sekolah->rekap ? ($sekolah->rekap->jmlMuridPria + $sekolah->rekap->jmlMuridWanita) : '-' }}</td>
+                                    <td>{{ $sekolah->rekap ? $sekolah->rekap->jmlRombel : '-' }}</td>
+                                    <td>{{ $sekolah->sarpras ? $sekolah->sarpras->jmlh_rk : '-' }}</td>
+                                    <td>{{ $sekolah->sarpras ?  max($sekolah->rekap->jmlRombel - $sekolah->sarpras->jmlh_rk, 0) : '-' }}</td>
                                 </tr>
-                                @empty
-                                <tr>
-                                    <td colspan="5" class="text-center">Data tidak tersedia.</td>
-                                </tr>
-                                @endforelse
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>No. </th>
-                                    <th>Nama Kecamatan</th>
-                                    <th>Jumlah SD Negeri</th>
-                                    <th>Jumlah SD Swasta</th>
-                                    <th>Total SD</th>
+                                    <th>Nama Sekolah</th>
+                                    <th>NPSN</th>
+                                    <th>Status</th>
+                                    <th>Rombel</th>
+                                    <th>Ruang Kelas</th>
+                                    <th>Jumlah Murid</th>
+                                    <th>Kebutuhan RKB</th>
+                                    <th>Jumlah Guru</th>
                                 </tr>
                             </tfoot>
                         </table>
