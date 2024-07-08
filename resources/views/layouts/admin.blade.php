@@ -39,6 +39,12 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
+                        <a href="/admin/kelola_tahunAjar" class="sidebar-link">
+                            <i class="fa-solid fa-calendar pe-2"></i>
+                            Tahun Ajar
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
                         <a href="/admin/profile" class="sidebar-link"><i class="fa-regular fa-user pe-2"></i>
                             Profile
                         </a>
@@ -60,9 +66,8 @@
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-                                <img src="{{ asset(Auth::user()->pfp) }}" class="avatar img-fluid rounded" alt="">
-
-                            </a>
+                                <img src="{{ asset(Auth::user()->pfp) }}" class="avatar img-fluid rounded border" alt="">
+                            </a>                            
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a href="/admin/profile" class="dropdown-item">Profile</a>
                                 <a href="/logout" class="dropdown-item">Logout</a>
