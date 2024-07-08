@@ -17,16 +17,18 @@ use Illuminate\Support\Facades\Route;
 */
 // Route::get('/', [SesiController::class, 'index']);
 Route::middleware(['guest'])->group(function () {
+    Route::get('/', [SesiController::class, 'index'])->name('login');
+    Route::post('/', [SesiController::class, 'login']);
     Route::get('/login', [SesiController::class, 'index'])->name('login');
     Route::post('/login', [SesiController::class, 'login']);
-    
 });
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/staff/home', [StaffController::class, 'index'])->middleware('userAkses:staff')->name('staff.home');
+    Route::get('/staff/home/{id_Kec}/sekolah', [StaffController::class, 'daftarSekolah'])->name('staff.daftarSekolah');
     Route::get('/staff/tambah-sekolah', [StaffController::class, 'tambahSekolah'])->middleware('userAkses:staff');
     Route::post('/staff/tambah-sekolah', [StaffController::class, 'createSekolah'])->middleware('userAkses:staff');
-    Route::get('/staff/ubah-sekolah/{id_sekolah}', [StaffController::class, 'ubahSekolah'])->middleware('userAkses:staff');
+    Route::get('/staff/ubah-sekolah/{id_sekolah}', [StaffController::class, 'ubahSekolah'])->middleware('userAkses:staff')->name('staff.ubah_sekolah');
     Route::post('/staff/ubah-sekolah/{id_sekolah}', [StaffController::class, 'updateSekolah'])->middleware('userAkses:staff');
     Route::get('/staff/hapus-sekolah/{id_sekolah}', [StaffController::class, 'hapusSekolah'])->middleware('userAkses:staff')->name('staff.hapus_sekolah');
     // Route::get('/staff/profile', [StaffController::class, 'profile'])->middleware('userAkses:staff');
@@ -52,6 +54,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [SesiController::class, 'logout']);
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });

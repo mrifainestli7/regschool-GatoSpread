@@ -3,7 +3,7 @@
 @section('container')
     <div class="container-fluid">
         <div class="mb-3">
-            <h4 class="mt-2 mb-4">Profile</h4>
+            <h4 class="mt-2 mb-4">Profile Sekolah</h4>
 
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">
@@ -18,7 +18,7 @@
                             <div class="col-md-2 col-9">
                                 <div class="dropdown ml-auto">
                                     <li class="nav-item dropdown">
-                                    <a class="btn btn-secondary dropdown-toggle rounded-4" style="background-color: #4c45b4" data-bs-toggle="dropdown" 
+                                    <a class="btn btn-secondary dropdown-toggle rounded-4" style="background-color: #857ac6" data-bs-toggle="dropdown" 
                                         id="dropdownMenuButton" href="#" role="button" aria-expanded="false">{{ $tahunAjar->tahunAjar1 }} / {{ $tahunAjar->tahunAjar2 }}</a>
                                         <ul class="dropdown-menu rounded-4" aria-labelledby="dropdownMenuButton">
                                           @foreach($listTahunAjar as $tahun)
@@ -35,22 +35,28 @@
                                 <div class="col-md-2 col-9">
                                 <div class="dropdown ml-auto">
                                     <li class="nav-item dropdown">
-                                    <a class="btn btn-secondary dropdown-toggle rounded-4" style="background-color: #4c45b4" data-bs-toggle="dropdown" 
+                                    <a class="btn btn-secondary dropdown-toggle rounded-4" style="background-color: #857ac6" data-bs-toggle="dropdown" 
                                         id="dropdownMenuButton" href="#" role="button" aria-expanded="false">AKSI</a>
                                     <ul class="dropdown-menu rounded-4" aria-labelledby="dropdownMenuButton">
-                                        <li><a class="dropdown-item" href="{{ route('staff.tambah_rekap', ['id_sekolah' => $sekolah->id_sekolah, 'id_tahunajar' => $tahunAjar->id_thnAjar]) }}">Tambah Data Rekap</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('staff.ubah_rekap', ['id_rekap' => $rekap->id_rekap ?? 0]) }}">Ubah Data Rekap</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('staff.tambah_sarpras', ['id_sekolah' => $sekolah->id_sekolah, 'id_tahunajar' => $tahunAjar->id_thnAjar]) }}">Tambah Data Sarpras </a></li>
-                                        <li><a class="dropdown-item" href="{{ route('staff.ubah_sarpras', ['id_sarpras' => $sarpras->id_sarpras ?? 0]) }}">Ubah Data Sarpras</a></li>
-                                        <li><a class="dropdown-item" href="#">Ubah Data Sekolah</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('staff.hapus_sekolah', ['id_sekolah' => $sekolah->id_sekolah ?? 0]) }}">Hapus Data Sekolah </a></li>
+                                        @if(isset($rekap) && $rekap->id_rekap)
+                                            <li><a class="dropdown-item" href="{{ route('staff.ubah_rekap', ['id_rekap' => $rekap->id_rekap ]) }}">Ubah Data Rekap</a></li>
+                                        @else
+                                            <li><a class="dropdown-item" href="{{ route('staff.tambah_rekap', ['id_sekolah' => $sekolah->id_sekolah, 'id_tahunajar' => $tahunAjar->id_thnAjar]) }}">Tambah Data Rekap</a></li>
+                                        @endif
+                                        @if(isset($rekap) && $sarpras->id_sarpras)
+                                            <li><a class="dropdown-item" href="{{ route('staff.ubah_sarpras', ['id_sarpras' => $sarpras->id_sarpras]) }}">Ubah Data Sarpras</a></li>
+                                        @else
+                                            <li><a class="dropdown-item" href="{{ route('staff.tambah_sarpras', ['id_sekolah' => $sekolah->id_sekolah, 'id_tahunajar' => $tahunAjar->id_thnAjar]) }}">Tambah Data Sarpras </a></li>
+                                        @endif
+                                        <li><a class="dropdown-item" href="{{ route('staff.ubah_sekolah', ['id_sekolah' => $sekolah->id_sekolah]) }}">Ubah Data Sekolah</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('staff.hapus_sekolah', ['id_sekolah' => $sekolah->id_sekolah ?? 0]) }}" style="background-color: #e15555;">Hapus Data Sekolah </a></li>
                                     </ul>
                                     </li>
                                 </div>
                                 </div>
 
                             </div>
-                            </div>
+                        </div>
 
                         
                     </div>
@@ -63,7 +69,7 @@
                             <div class="container result-containe ">
 
                             <h5 class="mb-1">{{ $sekolah->nama_sekolah }}</h5>
-                            <p class="mb-0">Kebutuhan Ruang Kelas : {{ $sekolah->sarpras ?  max($sekolah->rekap->jmlRombel - $sekolah->sarpras->jmlh_rk, 0) : '-' }}</p>
+                            <p class="mb-0">Kebutuhan Ruang Kelas : {{ $kebutuhan_rk }}</p>
                             </div>
                         </div>
                     </div>
@@ -79,10 +85,15 @@
                 </div>
             </div>
      </div>
+   
 <!-- Nav pills -->
 <style>
     .nav-tabs .nav-link.active {
       background:#f68365;
+      color: white;
+    }
+    .nav-tabs .nav-link {
+      background:#9994BB;
       color: white;
     }
   </style>
@@ -102,45 +113,44 @@
 <div class="tab-content">
   <div class="tab-pane container active p-0" id="home">
     
-<div class="row">
-    <div class="col-xl-6 col-lg-8 col-md-8 col-sm-12 col-12">
-        <div class="card"style=" height: 150px;" >
-            <div class="card-body p-3">
-                <div class="container mt-1">
-                    <div class="container result-containe ">
-                        <h4 class="result-title">Identitas Sekolah</h4>
-                        <p class="mb-1">NPSN : {{ $sekolah->npsn }}</p>
-                        <p class="mb-1">Tingkat Pendidikan : SD</p>
-                        <p class="mb-1">Status : {{ $sekolah->status }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-xl-6 col-lg-8 col-md-8 col-sm-12 col-12">
-        <div class="card" style=" height: 150px;" >
-            <div class="card-body p-3">
-                <div class="container mt-1">
-                    <div class="container result-containe ">
-                        <h4 class="result-title">Alamat Sekolah</h4>
-                        <p class="small text-muted mb-1"><strong>Alamat : {{ $sekolah->alamat }}, RW.{{ $sekolah->rw }} RT.{{ $sekolah->rt }}, {{ $sekolah->kelurahan_desa }}, Kec. {{ $kec->nama_kecamatan }}, Deli Serdang, Sumatera Utara {{ $sekolah->kode_pos }}</strong></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-    
     
 <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12 col-lg-6 col-md-6 col-sm-12 col-12">
+    <div class="row">
+        <div class="col-xl-6 col-lg-8 col-md-8 col-sm-12 col-12">
+            <div class="card"style=" height: 150px;" >
+                <div class="card-body p-3">
+                    <div class="container mt-1">
+                        <div class="container result-containe ">
+                            <h4 class="result-title">Identitas Sekolah</h4>
+                            <p class="mb-1">NPSN : {{ $sekolah->npsn }}</p>
+                            <p class="mb-1">Tingkat Pendidikan : SD</p>
+                            <p class="mb-1">Status : {{ $sekolah->status }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-6 col-lg-8 col-md-8 col-sm-12 col-12">
+            <div class="card" style=" height: 150px;" >
+                <div class="card-body p-3">
+                    <div class="container mt-1">
+                        <div class="container result-containe ">
+                            <h4 class="result-title">Alamat Sekolah</h4>
+                            <p class="small text-muted mb-1"><strong>Alamat : {{ $sekolah->alamat }}, RW.{{ $sekolah->rw }} RT.{{ $sekolah->rt }}, {{ $sekolah->kelurahan_desa }}, Kec. {{ $kec->nama_kecamatan }}, Deli Serdang, Sumatera Utara {{ $sekolah->kode_pos }}</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card" >
         <div class="card-body p-3">
           <div class="container mt-1">
             <div class="container result-containe">
-                <div class="row align-items-center  mt-3">
+                <div class="row align-items-center my-3">
                     <div class="col">
-                        <h4 class="result-title">Data Tahun Ajar </h4>
+                        <h4 class="result-title">Data Tahun Ajar : {{ $tahunAjar->tahunAjar1 }} / {{ $tahunAjar->tahunAjar2 }}</h4>
                     </div>
                 </div>   
                     <div class="row">
@@ -160,7 +170,7 @@
                             <p><strong>Jumlah Guru:</strong> </p>
                             <p><strong>Guru Honor:</strong> {{ $rekap->jmlGuruHonor }}</p>
                             <p><strong>Guru PNS:</strong> {{ $rekap->jmlGuruPNS }}</p>
-                            <p><strong>Non Gender:</strong> {{ $rekap->jmlGuruHonor + $rekap->jmlGuruPNS }}</p>
+                            <p><strong>Total:</strong> {{ $rekap->jmlGuruHonor + $rekap->jmlGuruPNS }}</p>
                         </div>
                     </div>
                 </div>
@@ -186,7 +196,7 @@
   <div class="tab-pane container fade  p-0 " id="menu1">
   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
     <div class="card">
-        <h5 class="card-header">Detail Sarana</h5>
+        <h5 class="card-header">Detail Sarana : {{ $tahunAjar->tahunAjar1 }} / {{ $tahunAjar->tahunAjar2 }}</h5>
         <div class="card-body">
             <div class="table-responsive ">
                 <table class="table">
@@ -236,7 +246,7 @@
 </div>
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
     <div class="card">
-        <h5 class="card-header">Detail Pra-Sarana</h5>
+        <h5 class="card-header">Detail Pra-Sarana : {{ $tahunAjar->tahunAjar1 }} / {{ $tahunAjar->tahunAjar2 }}</h5>
         <div class="card-body">
             <div class="table-responsive ">
                 <table class="table">

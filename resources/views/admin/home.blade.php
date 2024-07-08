@@ -41,11 +41,9 @@
                                                         </a>
                                                     </td>
                                                 </tr>
-                                                        @empty
-                                                        <div class="alert alert-danger">
-                                                            Data Post belum Tersedia.
-                                                        </div>
-                                                    @endforelse
+                                                @empty
+                                                <div class="alert alert-danger"> Data Post belum Tersedia.</div>
+                                            @endforelse
                                             </tbody>
                                         </table>
                                     </div>
