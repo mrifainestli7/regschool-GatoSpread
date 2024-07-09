@@ -26,6 +26,10 @@
                                                             <i class="bi bi-hand-index"></i>
                                                             <span class="px-2 py-1">Ubah</span>
                                                         </a>
+                                                        <a href="{{ route('admin.hapusTahun', ['id' => $data->id_thnAjar])}}" class="btn btn-success btn-sm rounded-4 mx-2 my-2" style="background-color: #ee5151;">
+                                                            <i class="bi bi-hand-index"></i>
+                                                            <span class="px-2 py-1">Hapus</span>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             @empty
@@ -71,7 +75,7 @@
                                             <p>*contoh : 2022 / 2023 </p>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary" style="background-color: #4c45b4">
                                         Simpan
                                     </button>
                                 </form>
