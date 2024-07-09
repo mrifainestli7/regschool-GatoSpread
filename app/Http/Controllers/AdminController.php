@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rekap;
+use App\Models\Sarpras;
 use App\Models\TahunAjar;
 use App\Models\User;
 use Carbon\Carbon;
@@ -177,17 +179,20 @@ class AdminController extends Controller
 
     function tambahTahun(Request $request): RedirectResponse{ 
         $this->validate($request, [
-            'tahun_ajar1' => 'required|integer|unique:tahun_ajar,tahunAjar1',
-            'tahun_ajar2' => 'required|integer|unique:tahun_ajar,tahunAjar2',
+            'tahun_ajar1' => 'required|integer|min:1|unique:tahun_ajar,tahunAjar1',
+            'tahun_ajar2' => 'required|integer|min:1|unique:tahun_ajar,tahunAjar2',
         ],[
             'tahun_ajar1.required' => 'Tahun Ajar pertama harus diisi.',
             'tahun_ajar1.integer' => 'Tahun Ajar pertama harus berupa bilangan bulat.',
+            'tahun_ajar1.min' => 'Tahun Ajar pertama tidak boleh lebih kecil dari 1.',
             'tahun_ajar1.unique' => 'Tahun Ajar pertama sudah ada dalam database.',
-
+        
             'tahun_ajar2.required' => 'Tahun Ajar kedua harus diisi.',
             'tahun_ajar2.integer' => 'Tahun Ajar kedua harus berupa bilangan bulat.',
+            'tahun_ajar2.min' => 'Tahun Ajar kedua tidak boleh lebih kecil dari 1.',
             'tahun_ajar2.unique' => 'Tahun Ajar kedua sudah ada dalam database.',
         ]);
+        
 
         if ($request->tahun_ajar1 >= $request->tahun_ajar2) {
             return redirect()->back()->withErrors(['tahun_ajar1' => 'Tahun Ajar 1 tidak boleh lebih besar atau sama dengan Tahun Ajar 2'])->withInput();
@@ -205,23 +210,32 @@ class AdminController extends Controller
         return redirect()->route('admin.kelolaTahun')->with(['success' => 'Data Berhasil Disimpan!']);
     }
     
+    function hapusTahun($id){ 
+        Rekap::where('id_thnAjar', $id)->delete();
+        Sarpras::where('id_thnAjar', $id)->delete();
+        TahunAjar::findOrFail($id)->delete();
+        return redirect()->route('admin.kelolaTahun')->with(['success' => 'Data Berhasil Dihapus!']);
+    }
+    
     function ubahTahun($id){ 
         $datas = TahunAjar::orderBy('tahunAjar1')->orderBy('tahunAjar2')->get();
         $value = TahunAjar::findOrFail($id);
         return view('admin.ubah_tahunAjar', compact('datas', 'value'));
     }
-    
+
     function updateTahun(Request $request, $id): RedirectResponse{ 
         $this->validate($request, [
-            'tahun_ajar1' => 'required|integer|unique:tahun_ajar,tahunAjar1',
-            'tahun_ajar2' => 'required|integer|unique:tahun_ajar,tahunAjar2',
+            'tahun_ajar1' => 'required|integer|min:1|unique:tahun_ajar,tahunAjar1',
+            'tahun_ajar2' => 'required|integer|min:1|unique:tahun_ajar,tahunAjar2',
         ],[
             'tahun_ajar1.required' => 'Tahun Ajar pertama harus diisi.',
             'tahun_ajar1.integer' => 'Tahun Ajar pertama harus berupa bilangan bulat.',
+            'tahun_ajar1.min' => 'Tahun Ajar pertama tidak boleh lebih kecil dari 1.',
             'tahun_ajar1.unique' => 'Tahun Ajar pertama sudah ada dalam database.',
-
+        
             'tahun_ajar2.required' => 'Tahun Ajar kedua harus diisi.',
             'tahun_ajar2.integer' => 'Tahun Ajar kedua harus berupa bilangan bulat.',
+            'tahun_ajar2.min' => 'Tahun Ajar kedua tidak boleh lebih kecil dari 1.',
             'tahun_ajar2.unique' => 'Tahun Ajar kedua sudah ada dalam database.',
         ]);
 
@@ -240,7 +254,7 @@ class AdminController extends Controller
         
         return redirect()->route('admin.kelolaTahun')->with(['success' => 'Data Berhasil Disimpan!']);
     }
-
+    
     function profile(){
         return view('admin/profile');
     }

@@ -50,6 +50,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/kelola_tahunAjar', [AdminController::class, 'tambahTahun'])->middleware('userAkses:admin')->name('admin.tambahTahun');
     Route::get('/admin/ubah_tahunAjar/{id}', [AdminController::class, 'ubahTahun'])->middleware('userAkses:admin')->name('admin.ubahTahun');
     Route::post('/admin/ubah_tahunAjar/{id}', [AdminController::class, 'updateTahun'])->middleware('userAkses:admin')->name('admin.updateTahun');
+    Route::get('/admin/hapus_tahunAjar/{id}', [AdminController::class, 'hapusTahun'])->middleware('userAkses:admin')->name('admin.hapusTahun');
     Route::post('/admin/tambah-akun', [AdminController::class, 'setAkun'])->middleware('userAkses:admin')->name('admin.tambahAkun');
     Route::get('/admin/detail-akun/{id}', [AdminController::class, 'detailAkun'])->middleware('userAkses:admin')->name('admin.detail-akun');
     Route::post('/admin/detail-akun/{id}', [AdminController::class, 'editAkun'])->middleware('userAkses:admin');
