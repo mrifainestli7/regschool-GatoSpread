@@ -1,5 +1,10 @@
 @extends('layouts.admin')
 
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 @section('container')
     <div class="container-fluid">
         <div class="mb-3">
@@ -26,7 +31,7 @@
                                                             <i class="bi bi-hand-index"></i>
                                                             <span class="px-2 py-1">Ubah</span>
                                                         </a>
-                                                        <a href="{{ route('admin.hapusTahun', ['id' => $data->id_thnAjar])}}" class="btn btn-success btn-sm rounded-4 mx-2 my-2" style="background-color: #ee5151;">
+                                                        <a href="{{ route('admin.hapusTahun', ['id' => $data->id_thnAjar])}}" class="btn btn-success btn-sm rounded-4 mx-2 my-2" style="background-color: #ee5151;" data-toggle="modal" data-target="#confirmDeleteModal">
                                                             <i class="bi bi-hand-index"></i>
                                                             <span class="px-2 py-1">Hapus</span>
                                                         </a>
@@ -84,6 +89,26 @@
                     </div>
                 </div>
                 
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi Hapus Tahun Ajar</h5>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin menghapus Tahun ajar ini? Tindakan ini akan menghapus data rekap sekolah pada tahun ini.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <form action="{{ route('admin.hapusTahun', ['id' => $data->id_thnAjar ?? 0]) }}" method="GET">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Hapus Tahun Ajar</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

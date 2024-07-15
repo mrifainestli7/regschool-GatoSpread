@@ -1,4 +1,10 @@
 @extends('layouts.admin')
+<!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 @section('container')
     <div class="container-fluid">
@@ -11,7 +17,7 @@
                     <div class="col-md-3">
                         <!-- Gambar Profil -->
                         <div class="text-center mb-4">
-                            <img src="{{ asset($user->pfp) }}"class="img-fluid profile-border" alt="Foto Profil">
+                            <img src="{{ asset($user->pfp) }}" class="img-fluid profile-border" alt="Foto Profil">
                         </div>
                         <!-- Terakhir Kali Diupdate -->
                         <div class="card mb-2">
@@ -87,10 +93,11 @@
                                     @enderror
                                     <!-- Tombol Submit -->
                                     <button type="submit" class="btn btn-primary mt-4">Ubah data</button>
-                                    <a href="{{ route('admin.hapusAkun', ['id' => $user->id])}}" class="btn btn-primary mt-4" style="background-color: #d22f2f;">
-                                        <i class="bi bi-hand-index "></i>
+                                    <!-- Tombol Hapus -->
+                                    <button type="button" class="btn btn-danger mt-4" data-toggle="modal" data-target="#confirmDeleteModal">
+                                        <i class="bi bi-hand-index"></i>
                                         <p2 class="px-2 py-1">Hapus Akun</p2>
-                                    </a>
+                                    </button>
                                 </form>
                             </div>
                         </div>
@@ -99,6 +106,30 @@
             </div>
 
              {{-- end here --}}
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi Hapus Akun</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin menghapus akun ini? Tindakan ini tidak dapat diurungkan.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <form action="{{ route('admin.hapusAkun', ['id' => $user->id])}}" method="GET">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Hapus Akun</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
