@@ -4,6 +4,19 @@
     <div class="container-fluid">
         <div class="mb-3">
             <h4 class="mt-2 mb-4">Profile Sekolah</h4>
+            <div class="mb-3">
+
+            <div class="col-md-4">
+                    <div class="page-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Daftar Kecamatan</a></li>
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Daftar Sekolah</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Profil Sekolah </li>
+                        </ol>              
+                    </nav>      
+                    </div> 
+                </div>
 
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="card">

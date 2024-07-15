@@ -10,6 +10,15 @@
     <div class="container-fluid">
         <div class="mb-3">
             <h4 class="mt-2 mb-4">Daftar Kecamatan</h4>
+            <div class="col-md-4">
+                    <div class="page-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page">Daftar Kecamatan</li>
+                        </ol>              
+                    </nav>      
+                    </div> 
+                </div>
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
