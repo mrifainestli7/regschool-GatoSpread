@@ -14,15 +14,28 @@ class StaffController extends Controller
     function index(){
         $kecamatans = Kecamatan::with('sekolah')->get();
         return view('staff.home', compact('kecamatans'));
-        // $sekolahs = Sekolah::with(['sarpras', 'rekap'])->get();
-        // return view('staff.home', compact('sekolahs'));
     }
 
-    function daftarSekolah($id_Kec){
+    function daftarSekolah($id_Kec, $id_thnAjar = null){
         $kecamatan = Kecamatan::findOrFail($id_Kec);  
-        $sekolahs = Sekolah::with(['sarpras', 'rekap'])->where('id_kecamatan', $id_Kec)->get();
-        //pisahkan sarpas dan rekapnya dari sekolah
-        return view('staff.daftar_sekolah', compact('kecamatan', 'sekolahs'));
+        if ($id_thnAjar) {
+            $tahunAjar = TahunAjar::where('id_thnAjar', $id_thnAjar)->first();
+        } else {
+            $tahunAjar = TahunAjar::orderBy('id_thnAjar', 'desc')->first();
+        }
+        if (!$kecamatan || !$tahunAjar) {abort(404,);}
+        
+        $listTahunAjar = TahunAjar::all();
+        
+        $sekolahs = Sekolah::with(['sarpras' => function ($query) use ($tahunAjar) {
+            $query->where('id_thnAjar', $tahunAjar->id_thnAjar);
+        }, 'rekap' => function ($query) use ($tahunAjar) {
+            $query->where('id_thnAjar', $tahunAjar->id_thnAjar);
+        }])
+        ->where('id_kecamatan', $id_Kec)
+        ->get();
+        
+        return view('staff.daftar_sekolah', compact('kecamatan', 'sekolahs', 'listTahunAjar', 'tahunAjar'));
     }
     
     function tambahSekolah(){
