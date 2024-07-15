@@ -10,6 +10,41 @@
     <div class="container-fluid">
         <div class="mb-3">
             <h4 class="mt-2 mb-4">Sekolah Dasar di {{ $kecamatan->nama_kecamatan }}</h4>
+            <!-- <div class="row">
+                <div class="col-md-2">
+                    
+                    </div>  -->
+                    <div class="row mt-2 mb-4">
+                    <div class="col-md-4">
+                        <div class="page-breadcrumb">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Daftar Kecamatan</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Ubah Rekap </li>
+                                </ol>              
+                            </nav>      
+                        </div>
+                    </div>
+                    <div class="col-md-8 text-end">
+                       
+                        <div class="form-group">
+                            <div class="dropdown ml-auto">
+                                <li class="nav-item dropdown">
+                                    <a class="btn btn-secondary dropdown-toggle rounded-4" style="background-color: #857ac6" data-bs-toggle="dropdown" 
+                                        id="dropdownMenuButton" href="#" role="button" aria-expanded="false">Tahun Ajar : </a>
+                                    <ul class="dropdown-menu rounded-4" aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item" href="#">Ubah Data Rekap</a></li>
+                                        <li><a class="dropdown-item" href="#">Tambah Data Rekap</a></li>
+                                        <li><a class="dropdown-item" href="#">Ubah Data Sarpras</a></li>
+                                        <li><a class="dropdown-item" href="#">Tambah Data Sarpras </a></li>
+                                        <li><a class="dropdown-item" href="#">Ubah Data Sekolah</a></li>
+                                        <li><a class="dropdown-item" href="#" style="background-color: #e15555;">Hapus Data Sekolah </a></li>
+                                    </ul>
+                                </li>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">

@@ -3,19 +3,9 @@
 @section('container')
     <div class="container-fluid">
         <div class="mb-3">
-            <h4 class="mt-2 mb-4">Tambah Rekap</h4> 
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="page-breadcrumb">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Profil Sekolah</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Tambah Rekap</li>
-                        </ol>              
-                    </nav>      
-                    </div> 
-                </div>
-                <div class="col-md-8">
+            <h4 class="mt-2 mb-2">Tambah Rekap</h4> 
+            <div class="row mb-2">
+                <div class="col-md-12">
                     <div class="form-group ">
                         <button type="submit" class="btn btn-primary move-right" style="background-color: #4c45b4; color: white;"> 
                             <i class="fas fa-arrow-left"></i> Kembali
