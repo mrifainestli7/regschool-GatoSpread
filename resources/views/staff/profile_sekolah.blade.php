@@ -10,14 +10,13 @@
                     <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Daftar Kecamatan</a></li>
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Daftar Sekolah</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Profil Sekolah </li>
+                            <li class="breadcrumb-item"><a href="/staff/home" class="breadcrumb-link">Daftar Kecamatan</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('staff.daftarSekolah', $kec->id_kecamatan) }}" class="breadcrumb-link">Daftar Sekolah</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Profile Sekolah </li>
                         </ol>              
-                    </nav>      
+                    </nav>
                     </div> 
                 </div>
-
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="card">
                     <div class="card-body" style="background-color: #4c45b4; border-radius: 8px 8px 0 0; padding: 20px;height: 80px">

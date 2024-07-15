@@ -3,14 +3,14 @@
 @section('container')
 <div class="container-fluid">
         <div class="mb-3 ">
-            <h4 class="mt-2 mb-4">Update Tahun Ajar</h4>
+            <h4 class="mt-2 mb-4">Update Rekap Tahun Ajar</h4>
             <div class="row">
                 <div class="col-md-4">
                     <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Profil Sekolah</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Update Tahun Ajar </li>
+                            <li class="breadcrumb-item active" aria-current="page">Update Rekap Tahun Ajar </li>
                         </ol>              
                     </nav>      
                     </div> 
@@ -30,7 +30,7 @@
                     <div class="col-md-17">
                         <div class="card">
                             <div class="card-header" style="background-color: #4c45b4; color: white;">
-                                Input data Tahun Ajar
+                                Input data perubahan Rekap Tahun Ajar
                             </div>
                             <div class="card-body">
                                 <form action="" method="POST" enctype="multipart/form-data" id="formAddAccount">

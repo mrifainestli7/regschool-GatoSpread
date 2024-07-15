@@ -7,9 +7,9 @@
             <div class="row mb-2">
                 <div class="col-md-12">
                     <div class="form-group ">
-                        <button type="submit" class="btn btn-primary move-right" style="background-color: #4c45b4; color: white;"> 
+                        <a href="{{ route('staff.profile_sekolah', ['id_sekolah' => $id_sekolah]) }}" class="btn btn-primary move-right" style="background-color: #4c45b4; color: white;">
                             <i class="fas fa-arrow-left"></i> Kembali
-                        </button>
+                        </a> 
                     </div> 
                 </div>
             </div>

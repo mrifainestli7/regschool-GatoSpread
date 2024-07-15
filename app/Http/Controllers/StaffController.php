@@ -6,8 +6,12 @@ use App\Models\Rekap;
 use App\Models\Sarpras;
 use App\Models\Sekolah;
 use App\Models\TahunAjar;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class StaffController extends Controller
 {
@@ -346,7 +350,7 @@ class StaffController extends Controller
         return view('staff.ubah_sarpras', compact('data'));
     }
 
-    function updateSarpras(Request $request, $id_sarpras) {
+    function updateSarpras(Request $request, $id_sarpras): RedirectResponse  {
         $this->validate($request, [
             'jmlh_rk' => 'required|integer',
             'jmlh_perpus' => 'required|integer',
@@ -415,5 +419,48 @@ class StaffController extends Controller
         $kec = Kecamatan::firstOrNew(['id_kecamatan' => $sekolah->id_kecamatan]);
         $kebutuhan_rk = max($rekap->jmlRombel - $sarpras->jmlh_rk, 0);
         return view('staff.profile_sekolah', compact('sekolah', 'tahunAjar', 'listTahunAjar','rekap','sarpras','kec', 'kebutuhan_rk'));
+    }
+    
+    function profile() {
+        $user = Auth::user();
+        return view('staff.profile_akun', compact('user'));
+    }
+
+    function updateProfile(Request $request): RedirectResponse {
+        $aut = Auth::user();
+        $this->validate($request, [
+            'picture' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
+            'email' => ['required','max:255',Rule::unique('users')->ignore($aut->id),],
+            'nomor_telepon' => 'required|max:255',
+        ],[
+            'picture.image' => 'file harus gambar',
+            'picture.mimes' => 'format gambar harus jpeg,jpg, atau png',
+            'picture.max' => 'ukuran gambar harus kurang dari 5 MB',
+            'email.required' => 'email wajib diisi',
+            'email.max' => 'email tidak boleh lebih dari 255 karakter',
+            'email.unique' => 'email sudah dipakai',
+            'nomor_telepon.required' => 'nomor telepone wajib diisi',
+            'nomor_telepon.max' => 'nomor telepone tidak boleh lebih dari 255 karakter',
+        ]);
+        $user = User::findOrFail($aut->id);
+        if($request->hasFile('picture')){
+            $originalNameWithoutExtension = pathinfo($request->file('picture')->getClientOriginalName(), PATHINFO_FILENAME);//ketika akan dihash maka aaka akan berbeda jika tidak pake pathfile
+            $extension = $request->file('picture')->getClientOriginalExtension();
+            $picture = time().'_'.hash('sha256',$originalNameWithoutExtension).'.'.$extension;
+            $request->file('picture')->storeAs('public/profile', $picture);
+            $imagePath = "storage/profile/".$picture;
+            
+            $pfp = str_replace('storage/', '', $user->pfp);
+            Storage::delete('public/'. $pfp);
+            
+            $user->pfp = $imagePath;
+            $user->email = $request->email;
+            $user->phone = $request->nomor_telepon;
+        }else{
+            $user->email = $request->email;
+            $user->phone = $request->nomor_telepon;
+        }
+        $user->save();
+        return redirect()->route('staff.profile_akun');
     }
 }

@@ -45,11 +45,6 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="/admin/profile" class="sidebar-link"><i class="fa-regular fa-user pe-2"></i>
-                            Profile
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
                         <a href="/logout" class="sidebar-link"><i class="fa-solid fa-sign-out-alt pe-2"></i>
                             Log Out
                         </a>  
@@ -69,7 +64,6 @@
                                 <img src="{{ asset(Auth::user()->pfp) }}" class="avatar img-fluid rounded border" alt="">
                             </a>                            
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a href="/admin/profile" class="dropdown-item">Profile</a>
                                 <a href="/logout" class="dropdown-item">Logout</a>
                             </div>
                         </li>

@@ -20,8 +20,8 @@
                         <div class="page-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Daftar Kecamatan</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Ubah Rekap </li>
+                                    <li class="breadcrumb-item"><a href="/staff/home" class="breadcrumb-link">Daftar Kecamatan</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Daftar Sekolah </li>
                                 </ol>              
                             </nav>      
                         </div>
@@ -32,14 +32,15 @@
                             <div class="dropdown ml-auto">
                                 <li class="nav-item dropdown">
                                     <a class="btn btn-secondary dropdown-toggle rounded-4" style="background-color: #857ac6" data-bs-toggle="dropdown" 
-                                        id="dropdownMenuButton" href="#" role="button" aria-expanded="false">Tahun Ajar : </a>
-                                    <ul class="dropdown-menu rounded-4" aria-labelledby="dropdownMenuButton">
-                                        <li><a class="dropdown-item" href="#">Ubah Data Rekap</a></li>
-                                        <li><a class="dropdown-item" href="#">Tambah Data Rekap</a></li>
-                                        <li><a class="dropdown-item" href="#">Ubah Data Sarpras</a></li>
-                                        <li><a class="dropdown-item" href="#">Tambah Data Sarpras </a></li>
-                                        <li><a class="dropdown-item" href="#">Ubah Data Sekolah</a></li>
-                                        <li><a class="dropdown-item" href="#" style="background-color: #e15555;">Hapus Data Sekolah </a></li>
+                                        id="dropdownMenuButton" href="#" role="button" aria-expanded="false">Tahun Ajar : {{ $tahunAjar->tahunAjar1 }} / {{ $tahunAjar->tahunAjar2 }}ㅤ</a>
+                                    <ul class="dropdown-menu dropdown-menu-end rounded-4" aria-labelledby="dropdownMenuButton">
+                                        @foreach($listTahunAjar as $tahun)
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('staff.daftarSekolah', ['id_Kec' => $kecamatan->id_kecamatan, 'id_thnAjar' => $tahun->id_thnAjar]) }}">
+                                                    {{ $tahun->tahunAjar1 }} / {{ $tahun->tahunAjar2 }}
+                                                </a>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </li>
                             </div>

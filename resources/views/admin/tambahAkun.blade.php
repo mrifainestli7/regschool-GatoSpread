@@ -18,7 +18,7 @@
                                 <form action="" method="POST" enctype="multipart/form-data" id="formAddAccount">
                                     @csrf
                                     <!-- NIP -->
-                                    <div class="form-group mt-3">
+                                    <div class="form-group mt-1">
                                         <label for="nip">NIP</label>
                                         <input type="number" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" value="{{ old('nip') }}" placeholder="Masukkan NIP" >
                                     </div>
