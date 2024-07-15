@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
+    <style>
+        .sidebar-item.selected {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Tambahkan bayangan saat item dipilih */
+        }
+    </style>
 </head>
 
 <body>
@@ -34,8 +39,9 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="/admin/profile" class="sidebar-link"><i class="fa-regular fa-user pe-2"></i>
-                            Profile
+                        <a href="/admin/kelola_tahunAjar" class="sidebar-link">
+                            <i class="fa-solid fa-calendar pe-2"></i>
+                            Tahun Ajar
                         </a>
                     </li>
                     <li class="sidebar-item">
@@ -55,11 +61,9 @@
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-                                <img src="{{ asset(Auth::user()->pfp) }}" class="avatar img-fluid rounded" alt="">
-
-                            </a>
+                                <img src="{{ asset(Auth::user()->pfp) }}" class="avatar img-fluid rounded border" alt="">
+                            </a>                            
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a href="/admin/profile" class="dropdown-item">Profile</a>
                                 <a href="/logout" class="dropdown-item">Logout</a>
                             </div>
                         </li>
@@ -95,6 +99,26 @@
     </div>
     <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
+    <script>
+    // Menghapus kelas 'selected' dari semua item sidebar saat halaman dimuat
+    window.addEventListener('DOMContentLoaded', () => {
+        sidebarItems.forEach(item => {
+            item.classList.remove('selected');
+        });
+    });
+
+    // Menandai item sidebar yang dipilih
+    const sidebarItems = document.querySelectorAll('.sidebar-item');
+    sidebarItems.forEach(item => {
+        item.addEventListener('click', () => {
+            sidebarItems.forEach(item => {
+                item.classList.remove('selected');
+            });
+            item.classList.add('selected');
+        });
+    });
+</script>
+
 </body>
 
 </html>

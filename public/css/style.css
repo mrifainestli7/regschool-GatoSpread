@@ -27,7 +27,9 @@ li {
 h4 {
     font-family: 'Poppins', sans-serif;
     font-size: 1.275rem;
-    color: var(--bs-emphasis-color);
+    /*color: var(--bs-emphasis-color);*/
+    color:#2e296c;
+    font-weight: bold;
 }
 
 /* Layout for admin dashboard skeleton */
@@ -43,7 +45,15 @@ h4 {
     min-width: 264px;
     background: #4c45b4;
     transition: all 0.35s ease-in-out;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px; /* Sesuaikan lebar sidebar sesuai kebutuhan */
+    z-index: 1000; /* Pastikan z-index lebih tinggi dari konten utama */
+    overflow-y: auto; /* Membuat sidebar dapat di-scroll jika konten melebihi tinggi */
 }
+
+
 
 .main {
     display: flex;
@@ -53,7 +63,7 @@ h4 {
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     width: 100%;
-    background: #F3F4FF;
+   
 }
 
 /* Sidebar Elements Style */
@@ -146,21 +156,27 @@ a.sidebar-link {
     width: 100%;
 }
 
-/* Sidebar Toggle */
+/* Sidebar Toggle  YANG DIUPDATE*/
 
 #sidebar.collapsed {
     margin-left: -264px;
 }
 
-/* Footer and Nav */
+#sidebar.collapsed + .main {
+    margin-left: 0;
+}
 
+/* YANG DI UPDATE */
 @media (max-width:767.98px) {
-
     .js-sidebar {
         margin-left: -264px;
     }
-
+    
     #sidebar.collapsed {
+        margin-left: 0;
+    }S
+    
+    #sidebar.collapsed + .main {
         margin-left: 0;
     }
 
@@ -208,3 +224,23 @@ html[data-bs-theme="light"] .theme-toggle .fa-sun {
     float: right;
     margin-top: 4px; /* Sesuaikan margin sesuai kebutuhan */
   }
+
+  /* footer 
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #4c45b4; /* Ubah sesuai kebutuhan 
+    color: #ffffff; /* Ubah sesuai kebutuhan 
+    text-align: center;
+    padding: 10px 0; /* Sesuaikan padding sesuai kebutuhan 
+    z-index: 999; /* Pastikan z-index cukup tinggi agar footer muncul di atas konten 
+}
+*/
+
+.profile-border {
+    border: 2px solid #b6b5c5; /* Warna dan ketebalan border */
+    border-radius: 5%; /* Membuat border menjadi lingkaran jika gambar berbentuk persegi */
+   
+}

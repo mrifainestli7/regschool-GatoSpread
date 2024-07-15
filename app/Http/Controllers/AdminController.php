@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rekap;
+use App\Models\Sarpras;
+use App\Models\TahunAjar;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
@@ -52,9 +55,11 @@ class AdminController extends Controller
         ]);
         
         if($request->hasFile('picture')){
-            $picture = time().'_'.$request->file('picture')->getClientOriginalName();
+            $originalNameWithoutExtension = pathinfo($request->file('picture')->getClientOriginalName(), PATHINFO_FILENAME);//ketika akan dihash maka aaka akan berbeda jika tidak pake pathfile
+            $extension = $request->file('picture')->getClientOriginalExtension();
+            $picture = time().'_'.hash('sha256',$originalNameWithoutExtension).'.'.$extension;
             $request->file('picture')->storeAs('public/profile', $picture);
-            $imagePath = "storage/profile".$picture;
+            $imagePath = "storage/profile/".$picture;
         } else {
             $imagePath = 'image/default_profile.png';
         }
@@ -69,13 +74,12 @@ class AdminController extends Controller
             'password' => bcrypt($request->password)
         ]);
 
-        return redirect()->route('tambah-akun')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('admin.home')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     function detailAkun(string $id): View
     {
         $user = User::findOrFail($id);
-        
         return view('admin/detailAkun', compact('user'));
     }
 
@@ -109,12 +113,15 @@ class AdminController extends Controller
 
         $user = User::findOrFail($id);
         if($request->hasFile('picture')){
-            $picture = time().'_'.$request->file('picture')->getClientOriginalName();
+            $originalNameWithoutExtension = pathinfo($request->file('picture')->getClientOriginalName(), PATHINFO_FILENAME);//ketika akan dihash maka aaka akan berbeda jika tidak pake pathfile
+            $extension = $request->file('picture')->getClientOriginalExtension();
+            $picture = time().'_'.hash('sha256',$originalNameWithoutExtension).'.'.$extension;
             $request->file('picture')->storeAs('public/profile', $picture);
             $imagePath = "storage/profile/".$picture;
-
-            Storage::delete('public/profile/1714119559_profile'); //cek jika default_profile bisa dihapus dengna method ini 
             
+            $pfp = str_replace('storage/', '', $user->pfp);
+            Storage::delete('public/'. $pfp);
+                
             if($request->filled('password')){
                 $user->update([
                     'pfp' => $imagePath,
@@ -156,13 +163,96 @@ class AdminController extends Controller
     }
 
     function remove($id){
-         $user = User::findOrFail($id);
+        $user = User::findOrFail($id);
+        $pfp = str_replace('storage/', '', $user->pfp);
+        Storage::delete('public/'. $pfp);
+ 
+        $user->delete();
+ 
+        return redirect()->route('admin.home')->with(['success' => 'Data Berhasil Dihapus!']);
+    }
 
-         Storage::delete('public/profile/'. $user->pfp);
- 
-         $user->delete();
- 
-         return redirect()->route('admin.home')->with(['success' => 'Data Berhasil Dihapus!']);
+    function tahunAjar(){ 
+        $datas = TahunAjar::orderBy('tahunAjar1')->orderBy('tahunAjar2')->get();
+        return view('admin.tahunAjar', compact('datas'));
+    }
+
+    function tambahTahun(Request $request): RedirectResponse{ 
+        $this->validate($request, [
+            'tahun_ajar1' => 'required|integer|min:1|unique:tahun_ajar,tahunAjar1',
+            'tahun_ajar2' => 'required|integer|min:1|unique:tahun_ajar,tahunAjar2',
+        ],[
+            'tahun_ajar1.required' => 'Tahun Ajar pertama harus diisi.',
+            'tahun_ajar1.integer' => 'Tahun Ajar pertama harus berupa bilangan bulat.',
+            'tahun_ajar1.min' => 'Tahun Ajar pertama tidak boleh lebih kecil dari 1.',
+            'tahun_ajar1.unique' => 'Tahun Ajar pertama sudah ada dalam database.',
+        
+            'tahun_ajar2.required' => 'Tahun Ajar kedua harus diisi.',
+            'tahun_ajar2.integer' => 'Tahun Ajar kedua harus berupa bilangan bulat.',
+            'tahun_ajar2.min' => 'Tahun Ajar kedua tidak boleh lebih kecil dari 1.',
+            'tahun_ajar2.unique' => 'Tahun Ajar kedua sudah ada dalam database.',
+        ]);
+        
+
+        if ($request->tahun_ajar1 >= $request->tahun_ajar2) {
+            return redirect()->back()->withErrors(['tahun_ajar1' => 'Tahun Ajar 1 tidak boleh lebih besar atau sama dengan Tahun Ajar 2'])->withInput();
+        }
+
+        if (($request->tahun_ajar2 - $request->tahun_ajar1) > 1) {
+            return redirect()->back()->withErrors(['tahun_ajar2' => 'Selisih antara Tahun Ajar 1 dan Tahun Ajar 2 tidak boleh lebih dari satu tahun'])->withInput();
+        }
+
+        TahunAjar::create([
+            'tahunAjar1' => $request->tahun_ajar1,
+            'tahunAjar2' => $request->tahun_ajar2,
+        ]);
+        
+        return redirect()->route('admin.kelolaTahun')->with(['success' => 'Data Berhasil Disimpan!']);
+    }
+    
+    function hapusTahun($id){ 
+        Rekap::where('id_thnAjar', $id)->delete();
+        Sarpras::where('id_thnAjar', $id)->delete();
+        TahunAjar::findOrFail($id)->delete();
+        return redirect()->route('admin.kelolaTahun')->with(['success' => 'Data Berhasil Dihapus!']);
+    }
+    
+    function ubahTahun($id){ 
+        $datas = TahunAjar::orderBy('tahunAjar1')->orderBy('tahunAjar2')->get();
+        $value = TahunAjar::findOrFail($id);
+        return view('admin.ubah_tahunAjar', compact('datas', 'value'));
+    }
+
+    function updateTahun(Request $request, $id): RedirectResponse{ 
+        $this->validate($request, [
+            'tahun_ajar1' => 'required|integer|min:1|unique:tahun_ajar,tahunAjar1',
+            'tahun_ajar2' => 'required|integer|min:1|unique:tahun_ajar,tahunAjar2',
+        ],[
+            'tahun_ajar1.required' => 'Tahun Ajar pertama harus diisi.',
+            'tahun_ajar1.integer' => 'Tahun Ajar pertama harus berupa bilangan bulat.',
+            'tahun_ajar1.min' => 'Tahun Ajar pertama tidak boleh lebih kecil dari 1.',
+            'tahun_ajar1.unique' => 'Tahun Ajar pertama sudah ada dalam database.',
+        
+            'tahun_ajar2.required' => 'Tahun Ajar kedua harus diisi.',
+            'tahun_ajar2.integer' => 'Tahun Ajar kedua harus berupa bilangan bulat.',
+            'tahun_ajar2.min' => 'Tahun Ajar kedua tidak boleh lebih kecil dari 1.',
+            'tahun_ajar2.unique' => 'Tahun Ajar kedua sudah ada dalam database.',
+        ]);
+
+        if ($request->tahun_ajar1 >= $request->tahun_ajar2) {
+            return redirect()->back()->withErrors(['tahun_ajar1' => 'Tahun Ajar 1 tidak boleh lebih besar atau sama dengan Tahun Ajar 2'])->withInput();
+        }
+
+        if (($request->tahun_ajar2 - $request->tahun_ajar1) > 1) {
+            return redirect()->back()->withErrors(['tahun_ajar2' => 'Selisih antara Tahun Ajar 1 dan Tahun Ajar 2 tidak boleh lebih dari satu tahun'])->withInput();
+        }
+
+        $tahunAjar = TahunAjar::findOrFail($id);
+        $tahunAjar->tahunAjar1 = $request->tahun_ajar1;
+        $tahunAjar->tahunAjar2 = $request->tahun_ajar2;
+        $tahunAjar->save();
+        
+        return redirect()->route('admin.kelolaTahun')->with(['success' => 'Data Berhasil Disimpan!']);
     }
     
     function profile(){

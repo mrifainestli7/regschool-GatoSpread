@@ -1,28 +1,12 @@
-@extends('layouts.admin')
-<!-- Bootstrap CSS -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<!-- Bootstrap JS and dependencies -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+@extends('layouts.main')
+
 
 @section('container')
     <div class="container-fluid">
         <div class="mb-3">
-            <h4 class="mt-2 mb-3">Detail akun</h4>
+            <h4 class="mt-2 mb-4">Profile akun</h4>
             {{-- start here --}}
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="page-breadcrumb">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.home')}}" class="breadcrumb-link">Kelola akun</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Detail akun </li>
-                        </ol>              
-                    </nav>      
-                    </div> 
-                </div>
-            </div>
+
             <div class="container mt-1">
                 <div class="row justify-content-center">
                     <div class="col-md-3">
@@ -49,27 +33,21 @@
                         <!-- Formulir -->
                         <div class="card">
                             <div class="card-header" style="background-color: #4c45b4; color: white;">
-                                Ubah data akun
+                                Profile
                             </div>
                             <div class="card-body">
                                 <form action="" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <!-- NIP -->
-                                    <div class="form-group">
+                                    <div class="form-group mt-1">
                                         <label for="nip">NIP</label>
-                                        <input type="number" class="form-control" id="nip" name="nip" value="{{ old('nip', $user->nip) }}" placeholder="Masukkan NIP">
+                                        <input type="text" class="form-control" id="nip" name="nip" value="{{ old('nip', $user->nip) }}" placeholder="" readonly>
                                     </div>
-                                    @error('nip')
-                                        <div class="text-danger">* {{ $message }}</div>
-                                    @enderror
                                     <!-- Nama -->
                                     <div class="form-group mt-3">
                                         <label for="nama">Nama</label>
-                                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama', $user->name) }}" placeholder="Masukkan Nama">
+                                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama', $user->name) }}" placeholder="" readonly>
                                     </div>
-                                    @error('nama')
-                                        <div class="text-danger">* {{ $message }}</div>
-                                    @enderror
                                     <!-- Nomor Telepon -->
                                     <div class="form-group mt-3">
                                         <label for="nomor_telepon">Nomor Telepon</label>
@@ -86,14 +64,6 @@
                                     @error('email')
                                         <div class="text-danger">* {{ $message }}</div>
                                     @enderror
-                                    <!-- Password -->
-                                    <div class="form-group mt-3">
-                                        <label for="password">Reset password</label>
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password">
-                                    </div>
-                                    @error('password')
-                                        <div class="text-danger">* {{ $message }}</div>
-                                    @enderror
                                     <!-- Ganti Foto Profil -->
                                     <div class="form-group mt-3">
                                         <label for="picture">Ganti foto profil</label>
@@ -103,12 +73,8 @@
                                         <div class="text-danger">* {{ $message }}</div>
                                     @enderror
                                     <!-- Tombol Submit -->
-                                    <button type="submit" class="btn btn-primary mt-4">Ubah data</button>
-                                    <!-- Tombol Hapus -->
-                                    <button type="button" class="btn btn-danger mt-4" data-toggle="modal" data-target="#confirmDeleteModal">
-                                        <i class="bi bi-hand-index"></i>
-                                        <p2 class="px-2 py-1">Hapus Akun</p2>
-                                    </button>
+                                    <button type="submit" class="btn btn-primary mt-4">Simpan</button>
+                                    <!-- Tombol Hapus -->                      
                                 </form>
                             </div>
                         </div>
@@ -117,30 +83,6 @@
             </div>
 
              {{-- end here --}}
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi Hapus Akun</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Apakah Anda yakin ingin menghapus akun ini? Tindakan ini tidak dapat diurungkan.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <form action="{{ route('admin.hapusAkun', ['id' => $user->id])}}" method="GET">
-                        @csrf
-                        <button type="submit" class="btn btn-danger">Hapus Akun</button>
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
 @endsection

@@ -9,21 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class TahunAjar extends Model
 {
     use HasFactory;
-    protected $table = 'tahunajar';
+    protected $table = 'tahun_ajar';
     protected $primaryKey = 'id_thnAjar';
     public $incrementing = false;
     protected $keyType = 'bigInteger';
     protected $fillable = [
-        'namaKepsek',
-        'noHpKepsep',
-        'jmlGuruHonor',
-        'jmlGuruPNS',
-        'jmlRombel',
-        'jmlMurid',
-        'id_sekolah'
+        'tahunAjar1',
+        'tahunAjar2',
     ];
-    public function sekolah(): BelongsTo
-    {
-        return $this->belongsTo(Sekolah::class, 'id_sekolah', 'id_sekolah');
-    }
 }
